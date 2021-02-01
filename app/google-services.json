@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "206287057539",
+    "project_id": "psybotic",
+    "storage_bucket": "psybotic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206287057539:android:12ddccc4f817a012aba1b6",
+        "android_client_info": {
+          "package_name": "com.scpfoundation.psybotic.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206287057539-h7i662ki6u8ed1duoau35fqo68q52l29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzSk29aqu8VOWq8USYd8HcvEH8aKYQRvU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206287057539-h7i662ki6u8ed1duoau35fqo68q52l29.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
