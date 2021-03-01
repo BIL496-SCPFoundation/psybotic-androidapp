@@ -3,7 +3,21 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
+    signingConfigs {
+        release {
+            keyAlias 'psybotic'
+            keyPassword 'psybotickey'
+            storeFile file('../psybotic-keysotre.jks')
+            storePassword 'psybotickeystore'
+        }
+        debug{
+            keyAlias 'psybotic'
+            keyPassword 'psybotickey'
+            storeFile file('../psybotic-keysotre.jks')
+            storePassword 'psybotickeystore'
+        }
 
+    }
     defaultConfig {
         applicationId "com.scpfoundation.psybotic.app"
         minSdkVersion 23
