@@ -14,7 +14,7 @@
     <string name="login_text">Login</string>
     <string name="email_input_label">Email</string>
     <string name="input_password_label">Password</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Psybotic</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -28,4 +28,5 @@
     <string name="login_with_google">SIGN IN WITH GOOGLE</string>
     <string name="sign_in_with_facebook">SIGN IN WITH FACEBOOK</string>
     <string name="login_as_guest">LOGIN AS GUEST</string>
+    <string name="profile_view_image">Profile view image</string>
 </resources>

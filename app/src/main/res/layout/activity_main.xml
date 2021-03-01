@@ -1,24 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:context=".ui.main.MainActivity">
 
-    <include
-        layout="@layout/app_bar_main"
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-6dp"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_activity_main"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/title"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
-</androidx.drawerlayout.widget.DrawerLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/greeting_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="30dp">
+
+        <TextView
+            android:id="@+id/greetings_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/greeting_view"
+            app:layout_constraintBottom_toBottomOf="@id/greeting_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="Welcome"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+            android:layout_marginTop="50dp"
+            android:id="@+id/first_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/greeting_view"
+            android:orientation="horizontal"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ai_chat_view"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight="0.30"
+                android:padding="20dp"
+                android:onClick="onClick"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="20dp"
+                android:layout_margin="20dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                <LinearLayout android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp">
+                    <ImageView
+                        android:id="@+id/chat_with_ai_view_image"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_width="match_parent"
+                        android:contentDescription="@string/profile_view_image"
+                        android:src="@mipmap/chatbot_foreground"
+                        />
+                    <TextView
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Psybotic"
+                        android:textSize="15dp"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/psychologist_chat_view"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight="0.30"
+                android:padding="20dp"
+                android:onClick="onClick"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="20dp"
+                android:layout_margin="20dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                <LinearLayout android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp">
+                    <ImageView
+                        android:id="@+id/psychologist_chat_view_image"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_width="match_parent"
+                        android:contentDescription="@string/profile_view_image"
+                        android:src="@mipmap/psychologist_foreground"
+                        />
+                    <TextView
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Psychologist"
+                        android:textSize="15dp"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/second_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/first_row"
+            >
+            <androidx.cardview.widget.CardView
+                android:id="@+id/profile_view"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight="0.30"
+                android:onClick="onClick"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="20dp"
+                android:layout_margin="20dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp">
+                    <ImageView
+                        android:id="@+id/profile_view_image"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_width="match_parent"
+                        android:contentDescription="@string/profile_view_image"
+                        android:src="@mipmap/profile_foreground"
+                        />
+                    <TextView
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Profile"
+                        android:textSize="15dp"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/notifications_view"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight="0.30"
+                android:padding="20dp"
+                android:onClick="onClick"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="@color/white"
+                card_view:cardCornerRadius="20dp"
+                android:layout_margin="20dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                <LinearLayout android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp">
+                    <ImageView
+                        android:id="@+id/notificaions_view_image"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_width="match_parent"
+                        android:contentDescription="@string/profile_view_image"
+                        android:src="@mipmap/bell_foreground"
+                        />
+                    <TextView
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Notifications"
+                        android:textSize="15dp"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
