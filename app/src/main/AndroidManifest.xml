@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.scpfoundation.psybotic.app">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -9,7 +10,10 @@
         android:roundIcon="@mipmap/app_icon_rounded"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.profile.ProfileActivity" />
+        <activity android:name=".ui.profile.ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <!-- <activity android:name=".ui.profile.ProfileActivity" -->
+        <!-- android:label="Profile"/> -->
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_main"
