@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final int RC_SIGN_IN = 100;
     private GoogleSignInClient mGoogleSignInClient;
     RequestQueue requestQueue;
-    private final String HOST = "http://192.168.0.12:8080";
+    private final String HOST = "https://limitless-lake-96203.herokuapp.com";
     private ProgressDialog dialog;
     private GoogleSignInAccount account;
 
