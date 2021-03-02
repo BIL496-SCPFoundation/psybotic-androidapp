@@ -19,6 +19,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.scpfoundation.psybotic.app.ui.main.MainActivity;
 import com.scpfoundation.psybotic.app.R;
 
@@ -67,13 +70,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
 //            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-            updateUI(null);
+            e.printStackTrace();
         }
     }
 
     private void updateUI(GoogleSignInAccount account) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("account", account);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -94,27 +100,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.google_login_button).setOnClickListener(this);
         findViewById(R.id.guest_login_button).setOnClickListener(this);
 
-    }
-
-    public Activity getActivity(Context context)
-    {
-        if (context == null)
-        {
-            return null;
-        }
-        else if (context instanceof ContextWrapper)
-        {
-            if (context instanceof Activity)
-            {
-                return (Activity) context;
-            }
-            else
-            {
-                return getActivity(((ContextWrapper) context).getBaseContext());
-            }
-        }
-
-        return null;
     }
 
     @Override
