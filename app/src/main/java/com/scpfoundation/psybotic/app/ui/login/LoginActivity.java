@@ -99,7 +99,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             dialog = ProgressDialog.show(this, "",
                     "Loading. Please wait...", true);
             requestQueue.add(req);
-            requestQueue.start();
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
