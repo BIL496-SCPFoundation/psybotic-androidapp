@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.psychologist_chat_view:
                 // go to psychologist chat page
+                
                 break;
             case R.id.notifications_view:
                 // go to notifications view

@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.chatbot.ChatBotActivity">
 
+    <com.stfalcon.chatkit.messages.MessagesList
+        android:id="@+id/messagesList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/input"
+        tools:ignore="UnknownId"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
