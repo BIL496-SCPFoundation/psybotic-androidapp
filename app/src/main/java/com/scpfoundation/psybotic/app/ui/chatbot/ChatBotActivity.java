@@ -2,7 +2,10 @@ package com.scpfoundation.psybotic.app.ui.chatbot;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
 import com.scpfoundation.psybotic.app.R;
 import com.stfalcon.chatkit.commons.ImageLoader;
@@ -24,24 +27,22 @@ public class ChatBotActivity extends AppCompatActivity {
         String senderId = "muhammed";
         ImageLoader imageLoader = null;
         MessagesListAdapter<Message> adapter = new MessagesListAdapter<>(senderId, imageLoader);
-        MessagesList m = new MessagesList(this,null);
-        m.setAdapter(adapter);
-        MessageInput inputView = new MessageInput(this,null);
-        adapter.addToStart(new Message(),true);
-        List<Message> messages = new ArrayList<>();
-        Message j = new Message();
-
-        messages.add(j);
-        adapter.addToEnd(messages,true);
-        inputView.setInputListener(new MessageInput.InputListener() {
+        ((MessagesList) findViewById(R.id.messagesList)).setAdapter(adapter);
+        MessageInput minput = findViewById(R.id.input);
+        minput.setInputListener(new MessageInput.InputListener() {
             @Override
             public boolean onSubmit(CharSequence input) {
                 //validate and send message
-                Message message = new Message();
-                adapter.addToStart(message, true);
+                System.out.println("LO   "+input);
+                Message message = new Message("input");
+                List<Message> lis = new ArrayList<>();
+                lis.add(message);
+                //adapter.addToEnd(lis, true);
                 return true;
             }
         });
+
     }
+
 
 }

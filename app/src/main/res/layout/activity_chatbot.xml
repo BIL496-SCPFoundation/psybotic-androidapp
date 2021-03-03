@@ -15,13 +15,11 @@
         app:layout_constraintRight_toRightOf="parent">
 
 
-
         <com.stfalcon.chatkit.messages.MessagesList
             android:id="@+id/messagesList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.9"
-            >
+            android:layout_weight="0.8">
 
         </com.stfalcon.chatkit.messages.MessagesList>
 
@@ -29,8 +27,8 @@
             android:id="@+id/input"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:inputHint="@string/hint_enter_a_message"
-            android:layout_weight="0.1"/>
+            android:layout_weight="0.2"
+            app:inputHint="@string/hint_enter_a_message" />
 
     </LinearLayout>
 

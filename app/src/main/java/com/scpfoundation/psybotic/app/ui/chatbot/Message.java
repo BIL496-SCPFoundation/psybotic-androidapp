@@ -1,4 +1,3 @@
-
 package com.scpfoundation.psybotic.app.ui.chatbot;
 
 import com.stfalcon.chatkit.commons.models.IUser;
@@ -13,9 +12,9 @@ public class Message implements com.stfalcon.chatkit.commons.models.IMessage {
     Author author;
     Date createdAt;
 
-    public Message(){
+    public Message(String text){
         id = "1232";
-        text = "pol";
+        this.text = text;
         author = new Author();
         createdAt = new Date();
     }
