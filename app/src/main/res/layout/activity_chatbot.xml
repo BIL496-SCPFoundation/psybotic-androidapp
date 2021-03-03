@@ -9,30 +9,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+
 
         <com.stfalcon.chatkit.messages.MessagesList
             android:id="@+id/messagesList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:ignore="UnknownId">
+            android:layout_height="0dp"
+            android:layout_weight="0.9"
+            >
 
         </com.stfalcon.chatkit.messages.MessagesList>
 
+        <com.stfalcon.chatkit.messages.MessageInput
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:inputHint="@string/hint_enter_a_message"
+            android:layout_weight="0.1"/>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/second_row"
-        android:layout_width="476dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="935dp">
-    <com.stfalcon.chatkit.messages.MessageInput
-        android:id="@+id/input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:inputHint="@string/hint_enter_a_message"/>
-    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

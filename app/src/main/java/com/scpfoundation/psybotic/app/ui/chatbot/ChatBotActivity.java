@@ -30,6 +30,7 @@ public class ChatBotActivity extends AppCompatActivity {
         adapter.addToStart(new Message(),true);
         List<Message> messages = new ArrayList<>();
         Message j = new Message();
+
         messages.add(j);
         adapter.addToEnd(messages,true);
         inputView.setInputListener(new MessageInput.InputListener() {

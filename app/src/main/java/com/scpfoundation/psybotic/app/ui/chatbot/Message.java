@@ -24,7 +24,10 @@ public class Message implements com.stfalcon.chatkit.commons.models.IMessage {
 
         return id;
     }
+    public void setText(String text) {
 
+        this.text = text;
+    }
     @Override
     public String getText() {
         return text;
