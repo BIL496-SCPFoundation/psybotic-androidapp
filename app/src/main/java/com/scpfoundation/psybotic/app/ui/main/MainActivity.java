@@ -15,9 +15,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
 import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.ui.login.LoginActivity;
+import com.scpfoundation.psybotic.app.ui.profile.ProfileActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnCompleteListener<Void>{
 
@@ -41,7 +41,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.profile_view:
-                // go to profile page
+                if (account != null) {
+                    Intent intent = new Intent(this.getApplicationContext(), ProfileActivity.class);
+                    intent.putExtra("account", account);
+                    startActivity(intent);
+                }
                 break;
             case R.id.ai_chat_view:
                 // go to ai chat page

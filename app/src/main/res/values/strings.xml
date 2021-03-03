@@ -30,4 +30,10 @@
     <string name="login_as_guest">LOGIN AS GUEST</string>
     <string name="profile_view_image">Profile view image</string>
     <string name="logout_icon_text">Logout icon</string>
+    <string name="profile_title">Profile</string>
+    <string name="profile_back_button_text">profile_back_button</string>
+    <string name="first_name_hint">First name</string>
+    <string name="last_name_hint">Last name</string>
+    <string name="e_mail_hint">E-mail</string>
+    <string name="city_hint">City-Province</string>
 </resources>
