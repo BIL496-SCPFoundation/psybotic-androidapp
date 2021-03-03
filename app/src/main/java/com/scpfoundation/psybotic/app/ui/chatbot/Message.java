@@ -1,8 +1,11 @@
+
 package com.scpfoundation.psybotic.app.ui.chatbot;
+
+import com.stfalcon.chatkit.commons.models.IUser;
 
 import java.util.Date;
 
-public class Message implements IMessage, com.stfalcon.chatkit.commons.models.IMessage {
+public class Message implements com.stfalcon.chatkit.commons.models.IMessage {
 
 
     String id;
@@ -11,10 +14,10 @@ public class Message implements IMessage, com.stfalcon.chatkit.commons.models.IM
     Date createdAt;
 
     public Message(){
-        id = null;
-        text = null;
-        author = null;
-        createdAt = null;
+        id = "1232";
+        text = "pol";
+        author = new Author();
+        createdAt = new Date();
     }
     @Override
     public String getId() {
@@ -27,11 +30,12 @@ public class Message implements IMessage, com.stfalcon.chatkit.commons.models.IM
         return text;
     }
 
+
+
     @Override
     public Author getUser() {
         return author;
     }
-
     @Override
     public Date getCreatedAt() {
         return createdAt;

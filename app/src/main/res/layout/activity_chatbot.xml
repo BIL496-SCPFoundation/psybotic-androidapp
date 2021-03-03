@@ -6,11 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".ui.chatbot.ChatBotActivity">
 
-    <com.stfalcon.chatkit.messages.MessagesList
-        android:id="@+id/messagesList"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/input"
-        tools:ignore="UnknownId"/>
+        android:orientation="horizontal">
 
+        <com.stfalcon.chatkit.messages.MessagesList
+            android:id="@+id/messagesList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:ignore="UnknownId">
+
+        </com.stfalcon.chatkit.messages.MessagesList>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/second_row"
+        android:layout_width="476dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="935dp">
+    <com.stfalcon.chatkit.messages.MessageInput
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:inputHint="@string/hint_enter_a_message"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
