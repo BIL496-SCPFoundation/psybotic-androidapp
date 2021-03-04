@@ -19,7 +19,7 @@
             android:id="@+id/messagesList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="0.75"
 
             >
 
@@ -29,7 +29,7 @@
             android:id="@+id/input"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_weight="0.25"
             app:inputHint="@string/write_a_message"
             app:showAttachmentButton="true"
             app:attachmentButtonDefaultIconColor="@color/purple"
