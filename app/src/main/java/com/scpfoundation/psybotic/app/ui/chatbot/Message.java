@@ -17,6 +17,7 @@ public class Message implements com.stfalcon.chatkit.commons.models.IMessage {
         this.text = text;
         author = new Author();
         createdAt = new Date();
+
     }
     @Override
     public String getId() {

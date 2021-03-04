@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.8"
+
             >
 
         </com.stfalcon.chatkit.messages.MessagesList>
@@ -29,7 +30,20 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.2"
-            app:inputHint="@string/hint_enter_a_message" />
+            app:inputHint="@string/write_a_message"
+            app:showAttachmentButton="true"
+            app:attachmentButtonDefaultIconColor="@color/purple"
+            app:attachmentButtonDefaultIconPressedColor="@color/black"
+            app:inputButtonHeight="30dp"
+            app:inputButtonMargin="16dp"
+            app:inputButtonWidth="30dp"
+            app:inputButtonDefaultIconColor="@color/green"
+            app:inputButtonDefaultBgPressedColor="@color/black"
+            app:inputMaxLines="2"
+            app:inputTextColor="@color/black"
+            app:inputTextSize="18sp"
+
+            />
 
     </LinearLayout>
 

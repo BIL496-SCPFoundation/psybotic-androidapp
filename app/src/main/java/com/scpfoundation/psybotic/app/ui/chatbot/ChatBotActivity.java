@@ -33,14 +33,19 @@ public class ChatBotActivity extends AppCompatActivity {
             @Override
             public boolean onSubmit(CharSequence input) {
                 //validate and send message
-                System.out.println("LO   "+input);
+
                 Message message = new Message(input.toString());
-                List<Message> lis = new ArrayList<>();
-                lis.add(message);
+//                List<Message> lis = new ArrayList<>();
+//                lis.add(message);
                 adapter.addToStart(message,true);
-                if(adapter != null)
-                    System.out.println("asdq");
+
                 return true;
+            }
+        });
+        minput.setAttachmentsListener(new MessageInput.AttachmentsListener() {
+            @Override
+            public void onAddAttachments() {
+                //select attachments
             }
         });
 

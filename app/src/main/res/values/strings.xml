@@ -29,6 +29,6 @@
     <string name="sign_in_with_facebook">SIGN IN WITH FACEBOOK</string>
     <string name="login_as_guest">LOGIN AS GUEST</string>
     <string name="profile_view_image">Profile view image</string>
-    <string name="write_a_message">Write A Message...</string>
-    <string name="hint_enter_a_message" />
+    <string name="write_a_message">Write A Message…</string>
+
 </resources>
