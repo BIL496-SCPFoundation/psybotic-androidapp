@@ -533,7 +533,7 @@
                 android:layout_marginTop="20dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/family_members_title_card"/>
+                app:layout_constraintTop_toBottomOf="@+id/add_fm_button"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/family_members_list"
                 android:layout_width="match_parent"
