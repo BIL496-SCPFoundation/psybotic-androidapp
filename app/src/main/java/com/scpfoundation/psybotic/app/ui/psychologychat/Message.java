@@ -1,4 +1,4 @@
-package com.scpfoundation.psybotic.app.ui.chatbot;
+package com.scpfoundation.psybotic.app.ui.psychologychat;
 
 import java.util.Date;
 

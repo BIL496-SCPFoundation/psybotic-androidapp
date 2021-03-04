@@ -5,5 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.psychologychat.PsychologyActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+
+        <com.stfalcon.chatkit.messages.MessagesList
+            android:id="@+id/messagesList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+
+            >
+
+        </com.stfalcon.chatkit.messages.MessagesList>
+
+        <com.stfalcon.chatkit.messages.MessageInput
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            app:inputHint="@string/write_a_message"
+            app:showAttachmentButton="true"
+            app:attachmentButtonDefaultIconColor="@color/purple"
+            app:attachmentButtonDefaultIconPressedColor="@color/black"
+            app:inputButtonHeight="30dp"
+            app:inputButtonMargin="16dp"
+            app:inputButtonWidth="30dp"
+            app:inputButtonDefaultIconColor="@color/green"
+            app:inputButtonDefaultBgPressedColor="@color/black"
+            app:inputMaxLines="2"
+            app:inputTextColor="@color/black"
+            app:inputTextSize="18sp"
+
+            />
+
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
