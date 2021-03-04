@@ -34,10 +34,12 @@ public class ChatBotActivity extends AppCompatActivity {
             public boolean onSubmit(CharSequence input) {
                 //validate and send message
                 System.out.println("LO   "+input);
-                Message message = new Message("input");
+                Message message = new Message(input.toString());
                 List<Message> lis = new ArrayList<>();
                 lis.add(message);
-                //adapter.addToEnd(lis, true);
+                adapter.addToStart(message,true);
+                if(adapter != null)
+                    System.out.println("asdq");
                 return true;
             }
         });

@@ -11,9 +11,9 @@ public class Author implements IUser {
     String avatar;
 
     public Author(){
-        id = null;
-        name = null;
-        avatar = null;
+        id = "1231";
+        name = "adavar";
+        avatar = "dfdf";
     }
 
     @Override
