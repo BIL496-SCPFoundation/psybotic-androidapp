@@ -1,12 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileActivity"
     android:orientation="vertical">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="#80000000"
+        android:elevation="2dp"
+        android:id="@+id/fm_create_dialog"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:padding="50dp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+        <androidx.cardview.widget.CardView
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/fm_create_card"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:contentPadding="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/white">>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
 
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:padding="10dp"
+                        app:srcCompat="@drawable/ic_name" />
+                    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                        android:id="@+id/fm_fn_create"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:fletPaddingBottom="0dp"
+                        android:visibility="visible">
+
+                        <EditText
+                            android:id="@+id/fm_fn_create_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/first_name_hint"
+                            android:textSize="@dimen/user_edit_text_size"
+                            android:maxLines="1"
+                            android:inputType="text"/>
+                    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        app:srcCompat="@drawable/ic_name"
+                        android:padding="10dp"/>
+                    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                        android:id="@+id/fm_ln_create"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:fletPaddingBottom="0dp"
+                        android:visibility="visible">
+
+                        <EditText
+                            android:id="@+id/fm_ln_create_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/last_name_hint"
+                            android:textSize="@dimen/user_edit_text_size"
+                            android:maxLines="1"
+                            android:inputType="text"/>
+                    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        app:srcCompat="@drawable/ic_message"
+                        android:padding="10dp"/>
+                    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                        android:id="@+id/fm_email_create"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:fletPaddingBottom="0dp"
+                        android:visibility="visible">
+
+                        <EditText
+                            android:id="@+id/fm_email_create_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/e_mail_hint"
+                            android:textSize="@dimen/user_edit_text_size"
+                            android:maxLines="1"
+                            android:inputType="textEmailAddress"/>
+                    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        app:srcCompat="@drawable/ic_phone"
+                        android:padding="10dp"/>
+                    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                        android:id="@+id/fm_phone_create"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:fletPaddingBottom="0dp"
+                        android:visibility="visible">
+
+                        <EditText
+                            android:id="@+id/fm_phone_create_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/phone_number_hint"
+                            android:textSize="@dimen/user_edit_text_size"
+                            android:maxLines="1"
+                            android:inputType="phone"/>
+                    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:padding="15dp"
+                        android:id="@+id/fm_cancel_submit"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/ic_close" />
+
+                    <ImageButton
+                        android:id="@+id/fm_submit"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_check"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/profile_view_toolbar"
@@ -328,6 +510,20 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"/>
             </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/add_fm_button"
+                android:layout_marginVertical="10dp"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/family_members_title_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_fm_button_text"
+                android:background="#ffffff"
+                android:textColor="@color/colorPrimary"
+                android:onClick="onClick"
+                android:paddingHorizontal="5dp"/>
             <ProgressBar
                 android:id="@+id/loading_family_members"
                 style="?android:attr/progressBarStyle"
@@ -343,7 +539,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
-                app:layout_constraintTop_toBottomOf="@id/family_members_title_card"
+                app:layout_constraintTop_toBottomOf="@id/add_fm_button"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
             </androidx.recyclerview.widget.RecyclerView>
@@ -352,4 +548,4 @@
     </androidx.core.widget.NestedScrollView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

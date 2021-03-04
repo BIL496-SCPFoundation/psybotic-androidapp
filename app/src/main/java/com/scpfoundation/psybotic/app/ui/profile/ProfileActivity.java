@@ -2,6 +2,7 @@ package com.scpfoundation.psybotic.app.ui.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,11 +30,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.data.FamilyMember;
 import com.scpfoundation.psybotic.app.data.User;
+import com.scpfoundation.psybotic.app.listener.FamilyMemberSubmitListener;
+import com.scpfoundation.psybotic.app.request.FamilyMemberSubmitRequest;
 import com.scpfoundation.psybotic.app.ui.util.DownloadImageTask;
 import com.wrapp.floatlabelededittext.FloatLabeledEditText;
 
@@ -59,6 +62,8 @@ public class ProfileActivity
     RecyclerView familyMemberList;
     FamilyMemberAdapter familyMemberAdapter;
     ProgressBar loadingFamilyMembers;
+    private FamilyMember newFamilyMember = new FamilyMember();
+    FamilyMemberSubmitRequest submitRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +84,41 @@ public class ProfileActivity
                 null, this, this);
         requestQueue.add(req);
         getFamilyMembers();
+
+        newFamilyMember.setSuperId(account.getId());
+        FamilyMemberSubmitListener listener = new FamilyMemberSubmitListener(newFamilyMember);
+
+        EditText fnCreate = findViewById(R.id.fm_fn_create_text);
+        fnCreate.addTextChangedListener(listener.new FirstNameListener());
+
+        EditText lnCreate = findViewById(R.id.fm_ln_create_text);
+        lnCreate.addTextChangedListener(listener.new LastNameListener());
+
+        EditText emailCreate = findViewById(R.id.fm_email_create_text);
+        emailCreate.addTextChangedListener(listener.new EmailListener());
+
+        EditText phoneCreate = findViewById(R.id.fm_phone_create_text);
+        phoneCreate.addTextChangedListener(listener.new PhoneListener());
+
+        final ConstraintLayout constraintLayout = findViewById(R.id.fm_create_dialog);
+
+        submitRequest =
+                new FamilyMemberSubmitRequest(newFamilyMember,
+                        this,
+                        constraintLayout,
+                        familyMemberAdapter);
+
+        ImageButton submitButton = findViewById(R.id.fm_submit);
+        submitButton.setOnClickListener(submitRequest);
+
+        ImageButton cancelSubmitButton = findViewById(R.id.fm_cancel_submit);
+        cancelSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                constraintLayout.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     public void showToast(String msg) {
@@ -97,6 +137,10 @@ public class ProfileActivity
                 break;
             case R.id.apply_edit_card:
                 sendUpdateUserRequest();
+                break;
+            case R.id.add_fm_button:
+                ConstraintLayout cl = findViewById(R.id.fm_create_dialog);
+                cl.setVisibility(View.VISIBLE);
                 break;
             default:
                 System.err.println("Button is not defined");
@@ -287,6 +331,7 @@ public class ProfileActivity
                 List<FamilyMember> familyMembers =
                         (List<FamilyMember>) gson.fromJson(response.toString(), type);
                 familyMemberAdapter = new FamilyMemberAdapter(familyMembers);
+                submitRequest.setAdapter(familyMemberAdapter);
                 familyMemberList.setAdapter(familyMemberAdapter);
                 familyMemberList.setLayoutManager(new LinearLayoutManager(getAppContext()));
 //                familyMemberList.setNestedScrollingEnabled(false);

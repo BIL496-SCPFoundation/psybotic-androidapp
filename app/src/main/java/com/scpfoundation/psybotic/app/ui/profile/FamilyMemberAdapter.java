@@ -40,6 +40,11 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
     private static final String HOST = "https://limitless-lake-96203.herokuapp.com";
     private ProgressDialog dialog;
 
+    public void insert(FamilyMember familyMember) {
+        familyMemberList.add(familyMember);
+        notifyDataSetChanged();
+    }
+
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -384,6 +389,11 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
     @Override
     public int getItemCount() {
         return familyMemberList.size();
+    }
+
+    public void notifyInsert(FamilyMember fm) {
+        familyMemberList.add(fm);
+        notifyItemInserted(getItemCount());
     }
 
 }
