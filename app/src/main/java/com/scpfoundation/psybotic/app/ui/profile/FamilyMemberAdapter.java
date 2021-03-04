@@ -3,6 +3,8 @@ package com.scpfoundation.psybotic.app.ui.profile;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +45,8 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        public TextView firstNameTextView;
-        public TextView lastNameTextView;
+        public TextView fnTextView;
+        public TextView lnTextView;
         public TextView emailTextView;
         public TextView phoneTextView;
 
@@ -60,10 +62,12 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
 
         public CardView editButton;
         public CardView deleteButton;
-
+        public CardView applyButton;
         public ImageView editImage;
+        public ImageView applyImage;
 
         public boolean editMode;
+
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder(View itemView) {
@@ -71,8 +75,8 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            firstNameTextView =  itemView.findViewById(R.id.family_member_first_name);
-            lastNameTextView = itemView.findViewById(R.id.family_member_last_name);
+            fnTextView =  itemView.findViewById(R.id.family_member_first_name);
+            lnTextView = itemView.findViewById(R.id.family_member_last_name);
             emailTextView = itemView.findViewById(R.id.family_member_email);
             phoneTextView = itemView.findViewById(R.id.family_member_phone);
 
@@ -88,7 +92,7 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
 
             editButton = itemView.findViewById(R.id.fm_edit_icon);
             deleteButton = itemView.findViewById(R.id.fm_delete_icon);
-
+            applyButton = itemView.findViewById(R.id.fm_apply_icon);
             editImage = itemView.findViewById(R.id.fm_edit_image);
 
             editMode = false;
@@ -115,9 +119,9 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
 
         final FamilyMember familyMember = familyMemberList.get(position);
 
-        final TextView fnTextView = holder.firstNameTextView;
+        final TextView fnTextView = holder.fnTextView;
         fnTextView.setText(familyMember.getFirstName() == null ? "Name unknown" : familyMember.getFirstName());
-        final TextView lnTextView = holder.lastNameTextView;
+        final TextView lnTextView = holder.lnTextView;
         lnTextView.setText(familyMember.getLastName() == null ? "Last name unknown" : familyMember.getLastName());
         final TextView emailTextView = holder.emailTextView;
         emailTextView.setText(familyMember.getEmail() == null ? "Email unknown" : familyMember.getEmail());
@@ -125,12 +129,80 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
         phoneTextView.setText(familyMember.getPhone() == null ? "Phone unknown" : familyMember.getPhone());
 
         EditText fnEditText = holder.fnEditText;
+        fnEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                familyMember.setFirstName(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         fnEditText.setText(familyMember.getFirstName());
+
         EditText lnEditText = holder.lnEditText;
+        lnEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                familyMember.setLastName(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         lnEditText.setText(familyMember.getLastName());
+
         EditText emailEditTex = holder.emailEditText;
+        emailEditTex.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                familyMember.setEmail(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         emailEditTex.setText(familyMember.getEmail());
+
         EditText phoneEditText = holder.phoneEditText;
+        phoneEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                familyMember.setPhone(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         phoneEditText.setText(familyMember.getPhone());
 
         final FloatLabeledEditText fnEdit = holder.fnEdit;
@@ -140,14 +212,90 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
 
         final ImageView editImage = holder.editImage;
 
-        final boolean editMode = holder.editMode;
-
         final CardView editButton = holder.editButton;
+        final CardView applyButton = holder.applyButton;
+        final CardView deleteButton = holder.deleteButton;
+
+
+        applyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RequestQueue requestQueue = Volley.newRequestQueue(emailTextView.getContext());;
+                String url = HOST + "/familyMembers/update";
+                JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
+                        null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        dialog.cancel();
+                        int index = familyMemberList.indexOf(familyMember);
+                        applyButton.setVisibility(View.GONE);
+                        deleteButton.setVisibility(View.VISIBLE);
+
+                        holder.editMode = false;
+
+                        fnEdit.setVisibility(View.GONE);
+                        emailEdit.setVisibility(View.GONE);
+                        lnEdit.setVisibility(View.GONE);
+                        phoneEdit.setVisibility(View.GONE);
+
+                        fnTextView.setVisibility(View.VISIBLE);
+                        lnTextView.setVisibility(View.VISIBLE);
+                        emailTextView.setVisibility(View.VISIBLE);
+                        phoneTextView.setVisibility(View.VISIBLE);
+
+                        editImage.setImageResource(R.drawable.ic_pencil);
+                        notifyItemChanged(position);
+//                        notifyDataSetChanged();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error instanceof TimeoutError) {
+                            Toast.makeText(editButton.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(editButton.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.cancel();
+                        applyButton.setVisibility(View.GONE);
+                        deleteButton.setVisibility(View.VISIBLE);
+
+                        holder.editMode = false;
+
+                        fnEdit.setVisibility(View.GONE);
+                        emailEdit.setVisibility(View.GONE);
+                        lnEdit.setVisibility(View.GONE);
+                        phoneEdit.setVisibility(View.GONE);
+
+                        fnTextView.setVisibility(View.VISIBLE);
+                        lnTextView.setVisibility(View.VISIBLE);
+                        emailTextView.setVisibility(View.VISIBLE);
+                        phoneTextView.setVisibility(View.VISIBLE);
+
+                        editImage.setImageResource(R.drawable.ic_pencil);
+                    }
+                }) {
+                    @Override
+                    public byte[] getBody() {
+                        Gson gson = new Gson();
+                        String body = gson.toJson(familyMember);
+                        return body.getBytes();
+                    }
+                };
+                dialog = ProgressDialog.show(editButton.getContext(), "",
+                        "Loading. Please wait...", true);
+
+                requestQueue.add(req);
+            }
+        });
+
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Show edit views
                 if (holder.editMode) {
+                    applyButton.setVisibility(View.GONE);
+                    deleteButton.setVisibility(View.VISIBLE);
+
                     holder.editMode = false;
 
                     fnEdit.setVisibility(View.GONE);
@@ -163,6 +311,8 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
                     editImage.setImageResource(R.drawable.ic_pencil);
 
                 } else { // hide edit views
+                    applyButton.setVisibility(View.VISIBLE);
+                    deleteButton.setVisibility(View.GONE);
                     holder.editMode = true;
 
                     fnTextView.setVisibility(View.GONE);
@@ -178,10 +328,8 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
                     editImage.setImageResource(R.drawable.ic_close);
                 }
 
-
             }
         });
-        CardView deleteButton = holder.deleteButton;
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,8 +348,10 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
                                     @Override
                                     public void onResponse(JSONObject response) {
                                         dialog.cancel();
+                                        int index = familyMemberList.indexOf(familyMember);
+                                        notifyItemRemoved(index);
                                         familyMemberList.remove(familyMember);
-                                        notifyItemRemoved(position);
+                                        notifyDataSetChanged();
                                     }
                                 }, new Response.ErrorListener() {
                                     @Override
@@ -228,6 +378,7 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
 
             }
         });
+
     }
 
     @Override
