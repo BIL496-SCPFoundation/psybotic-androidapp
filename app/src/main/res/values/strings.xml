@@ -36,4 +36,8 @@
     <string name="last_name_hint">Last name</string>
     <string name="e_mail_hint">E-mail</string>
     <string name="city_hint">City-Province</string>
+    <string name="family_members_title">Family Members</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="phone_number_hint">Phone number</string>
 </resources>

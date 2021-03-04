@@ -24,7 +24,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.gson.Gson;
-import com.scpfoundation.psybotic.app.ui.data.User;
+import com.scpfoundation.psybotic.app.data.User;
 import com.scpfoundation.psybotic.app.ui.main.MainActivity;
 import com.scpfoundation.psybotic.app.R;
 

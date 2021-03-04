@@ -2,8 +2,11 @@ package com.scpfoundation.psybotic.app.ui.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,17 +21,27 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.scpfoundation.psybotic.app.R;
-import com.scpfoundation.psybotic.app.ui.data.User;
+import com.scpfoundation.psybotic.app.data.FamilyMember;
+import com.scpfoundation.psybotic.app.data.User;
 import com.scpfoundation.psybotic.app.ui.util.DownloadImageTask;
 import com.wrapp.floatlabelededittext.FloatLabeledEditText;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileActivity
         extends AppCompatActivity
@@ -37,17 +50,22 @@ public class ProfileActivity
     private User curUser;
     private User editedUser;
     private GoogleSignInAccount account;
-    private final String HOST = "https://limitless-lake-96203.herokuapp.com/";
+    private final String HOST = "https://limitless-lake-96203.herokuapp.com";
     RequestQueue requestQueue;
     private ProgressDialog dialog;
     private ImageView profileImage;
     private ProgressBar imageLoading;
     private boolean editMode = false;
+    RecyclerView familyMemberList;
+    FamilyMemberAdapter familyMemberAdapter;
+    ProgressBar loadingFamilyMembers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         // initializing
+        familyMemberList = findViewById(R.id.family_members_list);
+        loadingFamilyMembers = findViewById(R.id.loading_family_members);
         account = (GoogleSignInAccount) getIntent().getExtras().get("account");
         requestQueue = Volley.newRequestQueue(this.getApplicationContext());
         imageLoading = findViewById(R.id.image_loading);
@@ -60,12 +78,12 @@ public class ProfileActivity
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url,
                 null, this, this);
         requestQueue.add(req);
+        getFamilyMembers();
     }
 
     public void showToast(String msg) {
         Toast toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
         toast.show();
-
     }
 
     @Override
@@ -85,10 +103,18 @@ public class ProfileActivity
         }
     }
 
+
+
     @Override
     public void onErrorResponse(VolleyError error) {
         Log.e("Request Error", error.getMessage(), error);
-        showToast(error.getMessage());
+        loadingFamilyMembers.setVisibility(View.GONE);
+        if (error instanceof TimeoutError) {
+            showToast("Timeout");
+        } else {
+            showToast(error.getMessage());
+
+        }
     }
 
     private void sendUpdateUserRequest() {
@@ -241,5 +267,31 @@ public class ProfileActivity
         ((TextView) findViewById(R.id.email_text)).setText(curUser.getEmail());
         ((TextView) findViewById(R.id.city_text)).setText(curUser.getCity());
 
+    }
+
+    private Context getAppContext() {
+        return this.getApplicationContext();
+    }
+
+    private void getFamilyMembers() {
+        String url = HOST + "/users/familyMembers?userId=" + account.getId();
+        loadingFamilyMembers.setVisibility(View.VISIBLE);
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                loadingFamilyMembers.setVisibility(View.GONE);
+                        Gson gson = new Gson();
+                Type type = new TypeToken<ArrayList<FamilyMember>>(){}.getType();
+
+                List<FamilyMember> familyMembers =
+                        (List<FamilyMember>) gson.fromJson(response.toString(), type);
+                familyMemberAdapter = new FamilyMemberAdapter(familyMembers);
+                familyMemberList.setAdapter(familyMemberAdapter);
+                familyMemberList.setLayoutManager(new LinearLayoutManager(getAppContext()));
+//                familyMemberList.setNestedScrollingEnabled(false);
+            }
+        }, this);
+        requestQueue.add(req);
     }
 }
