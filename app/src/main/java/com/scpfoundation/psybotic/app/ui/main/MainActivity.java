@@ -1,20 +1,32 @@
 package com.scpfoundation.psybotic.app.ui.main;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.scpfoundation.psybotic.app.R;
+import com.scpfoundation.psybotic.app.ui.login.LoginActivity;
+import com.scpfoundation.psybotic.app.ui.profile.ProfileActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnCompleteListener<Void>{
 
     private GoogleSignInAccount account;
     private TextView greetingsTextView;
+    private GoogleSignInClient mGoogleSignInClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseApp.initializeApp(this.getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         greetingsTextView= findViewById(R.id.greetings_text);
@@ -29,7 +41,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.profile_view:
-                // go to profile page
+                if (account != null) {
+                    Intent intent = new Intent(this.getApplicationContext(), ProfileActivity.class);
+                    intent.putExtra("account", account);
+                    startActivity(intent);
+                }
                 break;
             case R.id.ai_chat_view:
                 // go to ai chat page
@@ -40,6 +56,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.notifications_view:
                 // go to notifications view
                 break;
+            case R.id.logout_icon:
+                signOut();
+                break;
+            default:
+                System.err.println("Button not defined");
         }
+    }
+
+    private void signOut() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, this);
+    }
+
+    @Override
+    public void onComplete(@NonNull Task<Void> task) {
+        Intent intent = new Intent(this.getApplicationContext(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 }
