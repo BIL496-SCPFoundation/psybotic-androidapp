@@ -35,7 +35,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-<<<<<<< HEAD
     signingConfigs {
         release {
             keyAlias 'psybotic'
@@ -50,11 +49,9 @@ android {
             storePassword 'psybotickeystore'
         }
 
-=======
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
->>>>>>> 19cc144a54788d066406dc2526fbe1e3fa7fab97
     }
 }
 
@@ -85,4 +82,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
 }
