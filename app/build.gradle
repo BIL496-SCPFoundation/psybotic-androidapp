@@ -35,6 +35,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -59,7 +63,8 @@ dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-
+    implementation 'com.github.stfalcon-studio:Chatkit:0.4.1'
+    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
