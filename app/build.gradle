@@ -35,6 +35,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+<<<<<<< HEAD
     signingConfigs {
         release {
             keyAlias 'psybotic'
@@ -49,6 +50,11 @@ android {
             storePassword 'psybotickeystore'
         }
 
+=======
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+>>>>>>> 19cc144a54788d066406dc2526fbe1e3fa7fab97
     }
 }
 
@@ -72,7 +78,10 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.wrapp.floatlabelededittext:library:0.0.6'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
-
+    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.github.stfalcon-studio:Chatkit:0.4.1'
+    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

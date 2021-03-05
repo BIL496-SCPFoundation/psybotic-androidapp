@@ -14,6 +14,11 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <!-- <activity android:name=".ui.profile.ProfileActivity" -->
         <!-- android:label="Profile"/> -->
+        <activity android:name=".ui.psychologychat.PsychologyActivity"></activity>
+        <activity
+            android:name=".ui.chatbot.ChatBotActivity"
+            android:label="ChatBot"
+            />
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_main"
@@ -28,6 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

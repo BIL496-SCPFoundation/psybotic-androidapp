@@ -18,6 +18,7 @@ import com.google.firebase.FirebaseApp;
 import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.ui.login.LoginActivity;
 import com.scpfoundation.psybotic.app.ui.profile.ProfileActivity;
+import com.scpfoundation.psybotic.app.ui.chatbot.ChatBotActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnCompleteListener<Void>{
 
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.profile_view:
                 if (account != null) {
@@ -49,9 +51,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.ai_chat_view:
                 // go to ai chat page
+                Intent intentforChat = new Intent(this.getApplicationContext(), ChatBotActivity.class);
+
+                startActivity(intentforChat);
                 break;
             case R.id.psychologist_chat_view:
                 // go to psychologist chat page
+
                 break;
             case R.id.notifications_view:
                 // go to notifications view
