@@ -1,4 +1,4 @@
-package com.scpfoundation.psybotic.app.ui.data;
+package com.scpfoundation.psybotic.app.data;
 
 public class User {
 
