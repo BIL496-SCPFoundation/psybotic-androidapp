@@ -42,12 +42,7 @@ public class ChatBotActivity extends AppCompatActivity {
                 return true;
             }
         });
-        minput.setAttachmentsListener(new MessageInput.AttachmentsListener() {
-            @Override
-            public void onAddAttachments() {
-                //select attachments
-            }
-        });
+
 
 
 
