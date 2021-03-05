@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/app_icon_rounded"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.notifications.NotificationsActivity"></activity>
+        <activity android:name=".ui.notifications.NotificationActivity"></activity>
         <activity
             android:name=".ui.profile.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity android:name=".ui.profile.ProfileActivity" -->

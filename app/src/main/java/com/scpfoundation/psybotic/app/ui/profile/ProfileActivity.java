@@ -75,8 +75,8 @@ public class ProfileActivity
         requestQueue = Volley.newRequestQueue(this.getApplicationContext());
         imageLoading = findViewById(R.id.image_loading);
         profileImage = findViewById(R.id.profile_image);
-        new DownloadImageTask(profileImage, imageLoading)
-                .execute(account.getPhotoUrl().toString());
+        //new DownloadImageTask(profileImage, imageLoading)
+                //.execute(account.getPhotoUrl().toString());
 
         //find the user data
         String url = HOST + "/users/findById?id=" + account.getId();

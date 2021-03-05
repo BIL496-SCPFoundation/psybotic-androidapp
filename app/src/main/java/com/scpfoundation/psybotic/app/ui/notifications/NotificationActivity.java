@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.scpfoundation.psybotic.app.R;
 import android.os.Bundle;
 
-public class NotificationsActivity extends AppCompatActivity {
+public class NotificationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notifications);
+        setContentView(R.layout.activity_notification);
     }
 }

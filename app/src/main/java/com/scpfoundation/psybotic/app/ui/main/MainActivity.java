@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.ui.login.LoginActivity;
-import com.scpfoundation.psybotic.app.ui.notifications.NotificationsActivity;
+import com.scpfoundation.psybotic.app.ui.notifications.NotificationActivity;
 import com.scpfoundation.psybotic.app.ui.profile.ProfileActivity;
 import com.scpfoundation.psybotic.app.ui.chatbot.ChatBotActivity;
 
@@ -61,9 +61,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.notifications_view:
-                    Intent intent = new Intent(this.getApplicationContext(), NotificationsActivity.class);
-                    intent.putExtra("account", account);
-                    startActivity(intent);
+                Intent intent = new Intent(this.getApplicationContext(), NotificationActivity.class);
+                intent.putExtra("account", account);
+                startActivity(intent);
                 break;
             case R.id.logout_icon:
                 signOut();
