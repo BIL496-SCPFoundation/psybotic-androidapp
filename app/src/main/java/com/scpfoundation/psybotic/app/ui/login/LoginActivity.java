@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private final String HOST = "https://limitless-lake-96203.herokuapp.com";
     private ProgressDialog dialog;
     private GoogleSignInAccount account;
+    private boolean alreadySigned = false;
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -56,8 +57,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         /*
          * Check if user already signed in via a google account, if yes go to MainActivity
          */
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
+            alreadySigned = true;
             login(account);
             updateUI(account);
         }
@@ -140,7 +142,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onResponse(JSONObject response) {
         dialog.cancel();
-        updateUI(account);
+        if (!alreadySigned) {
+            updateUI(account);
+        }
     }
 
     private User setUser(GoogleSignInAccount account) {
