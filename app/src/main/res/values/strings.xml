@@ -42,5 +42,7 @@
     <string name="phone_number_hint">Phone number</string>
     <string name="add_fm_button_text">ADD NEW FAMILY MEMBER</string>
     <string name="write_a_message">Write A Message…</string>
+    <string name="emergency_contacts_title">Emergency Contacts</string>
+    <string name="add_ec_button_text">ADD NEW EMERGENCY CONTACT</string>
 
 </resources>
