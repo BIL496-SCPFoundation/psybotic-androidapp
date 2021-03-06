@@ -3,11 +3,14 @@ package com.scpfoundation.psybotic.app.ui.login;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,7 +25,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.scpfoundation.psybotic.app.data.User;
 import com.scpfoundation.psybotic.app.ui.main.MainActivity;
@@ -80,18 +85,52 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             user.setFirstName(account.getGivenName());
             user.setLastName(account.getFamilyName());
             user.setGoogleId(account.getId());
-            JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, HOST + "/users/login",
-                    null, this, this) {
-                @Override
-                public byte[] getBody() {
-                    Gson gson = new Gson();
-                    String body = gson.toJson(user);
-                    return body.getBytes();
-                }
-            };
-            dialog = ProgressDialog.show(this, "",
-                    "Loading. Please wait...", true);
-            requestQueue.add(req);
+            Context context = this;
+            FirebaseMessaging.getInstance().getToken()
+                    .addOnCompleteListener(new OnCompleteListener<String>() {
+                        @Override
+                        public void onComplete(@NonNull Task<String> task) {
+                            String token;
+                            if (!task.isSuccessful()) {
+                                Log.w("Device token exception", "Fetching FCM registration token failed", task.getException());
+                                return;
+                            } else {
+                                // Get new FCM registration token
+                                 token = task.getResult();
+                                user.setDeviceToken(token);
+                            }
+
+                            Log.d("Device token: ", token);
+                            JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, HOST + "/users/login",
+                                    null, new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    dialog.cancel();
+                                    updateUI(account);
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    dialog.cancel();
+                                    System.err.println(error.getMessage());
+                                }
+                            }) {
+                                @Override
+                                public byte[] getBody() {
+                                    Gson gson = new Gson();
+                                    String body = gson.toJson(user);
+                                    return body.getBytes();
+                                }
+                            };
+                            dialog = ProgressDialog.show(context, "",
+                                    "Loading. Please wait...", true);
+                            requestQueue.add(req);
+                            dialog.cancel();
+                        }
+                    });
+
+
+
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.

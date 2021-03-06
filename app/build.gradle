@@ -80,6 +80,10 @@ dependencies {
     implementation 'com.github.stfalcon-studio:Chatkit:0.4.1'
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
     testImplementation 'junit:junit:4.12'
+    implementation platform('com.google.firebase:firebase-bom:26.6.0')
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
