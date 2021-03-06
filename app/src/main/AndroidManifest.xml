@@ -14,7 +14,9 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <!-- <activity android:name=".ui.profile.ProfileActivity" -->
         <!-- android:label="Profile"/> -->
-        <activity android:name=".ui.psychologychat.PsychologyActivity"></activity>
+        <activity android:name=".ui.psychologychat.PsychologyActivity"
+
+        />
         <activity
             android:name=".ui.chatbot.ChatBotActivity"
             android:label="ChatBot"
