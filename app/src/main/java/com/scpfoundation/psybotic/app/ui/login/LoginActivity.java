@@ -3,11 +3,14 @@ package com.scpfoundation.psybotic.app.ui.login;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,7 +25,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.scpfoundation.psybotic.app.data.User;
 import com.scpfoundation.psybotic.app.ui.main.MainActivity;
@@ -39,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private final String HOST = "https://limitless-lake-96203.herokuapp.com";
     private ProgressDialog dialog;
     private GoogleSignInAccount account;
+    private boolean alreadySigned = false;
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -51,8 +57,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         /*
          * Check if user already signed in via a google account, if yes go to MainActivity
          */
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
+            alreadySigned = true;
+            login(account);
             updateUI(account);
         }
     }
@@ -73,29 +81,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             account = completedTask.getResult(ApiException.class);
-
             // Signed in successfully, show authenticated UI.
-            final User user = new User();
-            user.setEmail(account.getEmail());
-            user.setFirstName(account.getGivenName());
-            user.setLastName(account.getFamilyName());
-            user.setGoogleId(account.getId());
-            JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, HOST + "/users/login",
-                    null, this, this) {
-                @Override
-                public byte[] getBody() {
-                    Gson gson = new Gson();
-                    String body = gson.toJson(user);
-                    return body.getBytes();
-                }
-            };
-            dialog = ProgressDialog.show(this, "",
-                    "Loading. Please wait...", true);
-            requestQueue.add(req);
+            login(account);
+            showDialog(this);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-//            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             e.printStackTrace();
         }
     }
@@ -151,6 +142,64 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onResponse(JSONObject response) {
         dialog.cancel();
-        updateUI(account);
+        if (!alreadySigned) {
+            updateUI(account);
+        }
+    }
+
+    private User setUser(GoogleSignInAccount account) {
+        User user = new User();
+        user.setEmail(account.getEmail());
+        user.setFirstName(account.getGivenName());
+        user.setLastName(account.getFamilyName());
+        user.setGoogleId(account.getId());
+        return user;
+    }
+
+    private JsonObjectRequest createLoginRequest(User user) {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, HOST + "/users/login",
+            null, response -> {
+            if (dialog != null) {
+                dialog.cancel();
+            }
+                updateUI(account);
+            }, error -> {
+            if (dialog != null) {
+                dialog.cancel();
+            }
+                System.err.println(error.getMessage());
+            }) {
+            @Override
+            public byte[] getBody() {
+                Gson gson = new Gson();
+                String body = gson.toJson(user);
+                return body.getBytes();
+            }
+        };
+        return req;
+    }
+
+    private void login(GoogleSignInAccount account) {
+        final User user = setUser(account);
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    String token;
+                    if (!task.isSuccessful()) {
+                        Log.w("Device token exception", "Fetching FCM registration token failed", task.getException());
+                        return;
+                    } else {
+                        // Get new FCM registration token
+                        token = task.getResult();
+                        user.setDeviceToken(token);
+                    }
+                    Log.d("Device token: ", token);
+                    JsonObjectRequest req = createLoginRequest(user);
+                    requestQueue.add(req);
+                });
+    }
+
+    private void showDialog(Context context) {
+        dialog = ProgressDialog.show(context, "",
+                "Loading. Please wait...", true);
     }
 }

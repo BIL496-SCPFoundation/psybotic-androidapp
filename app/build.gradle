@@ -35,6 +35,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    signingConfigs {
+        release {
+            keyAlias 'psybotic'
+            keyPassword 'psybotickey'
+            storeFile file('../psybotic-keysotre.jks')
+            storePassword 'psybotickeystore'
+        }
+        debug{
+            keyAlias 'psybotic'
+            keyPassword 'psybotickey'
+            storeFile file('../psybotic-keysotre.jks')
+            storePassword 'psybotickeystore'
+        }
+
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
@@ -66,7 +80,15 @@ dependencies {
     implementation 'com.github.stfalcon-studio:Chatkit:0.4.1'
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
     testImplementation 'junit:junit:4.12'
+    implementation platform('com.google.firebase:firebase-bom:26.6.0')
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
+}
 
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
