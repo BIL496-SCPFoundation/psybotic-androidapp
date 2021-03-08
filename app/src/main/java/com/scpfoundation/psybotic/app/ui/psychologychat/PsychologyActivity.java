@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.scpfoundation.psybotic.app.R;
+import com.scpfoundation.psybotic.app.ui.chatbot.Author;
 import com.scpfoundation.psybotic.app.ui.chatbot.Message;
 import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PsychologyActivity extends AppCompatActivity {
 
@@ -30,8 +34,16 @@ public class PsychologyActivity extends AppCompatActivity {
             @Override
             public boolean onSubmit(CharSequence input) {
                 //validate and send message
-                com.scpfoundation.psybotic.app.ui.chatbot.Message message = new Message(input.toString());
+                //List<Message> messages = new ArrayList<>();
+                Message message = new Message(input.toString());
+                Message message2 = new Message("Heyoo!");
+                com.scpfoundation.psybotic.app.ui.chatbot.Author a = new Author();
+                a.setId(senderId);
+                message.setAuthor(a);
+
+                //adapter.addToStart(message,true);
                 adapter.addToStart(message,true);
+                adapter.addToStart(message2,false);
                 return true;
             }
         });

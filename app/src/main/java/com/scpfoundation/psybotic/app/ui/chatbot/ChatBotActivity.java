@@ -37,8 +37,17 @@ public class ChatBotActivity extends AppCompatActivity {
             @Override
             public boolean onSubmit(CharSequence input) {
                 //validate and send message
+                List<Message> messages = new ArrayList<>();
                 Message message = new Message(input.toString());
+                Message message2 = new Message("Heyoo!");
+                Author a = new Author();
+                a.setId(senderId);
+                message.setAuthor(a);
+                messages.add(message);
+                messages.add(message2);
+                //adapter.addToStart(message,true);
                 adapter.addToStart(message,true);
+                adapter.addToStart(message2,false);
                 return true;
             }
         });

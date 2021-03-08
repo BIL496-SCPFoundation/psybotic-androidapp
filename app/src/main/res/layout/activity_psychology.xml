@@ -18,29 +18,44 @@
             android:id="@+id/messagesList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.75"
+            android:layout_weight="0.95"
 
-            >
+
+            app:incomingDefaultBubbleColor="@color/white"
+            app:incomingDefaultBubblePressedColor="@color/cornflower_blue_two_dark"
+            app:incomingDefaultBubbleSelectedColor="@color/gray"
+            app:incomingDefaultImageOverlayPressedColor="@color/black"
+            app:incomingDefaultImageOverlaySelectedColor="@color/gray"
+            app:incomingTextColor="@color/black"
+            app:incomingTextLinkColor="@color/green"
+            app:incomingTextSize="18sp"
+
+
+            app:outcomingDefaultBubbleColor="#D2B3FD"
+            app:outcomingDefaultBubblePressedColor="@color/purple_dark"
+            app:outcomingDefaultBubbleSelectedColor="@color/cornflower_blue_two_dark"
+            app:outcomingDefaultImageOverlayPressedColor="@color/black"
+            app:outcomingDefaultImageOverlaySelectedColor="@color/gray"
+            app:outcomingTextColor="@color/black"
+            app:outcomingTextLinkColor="@color/brown"
+            app:outcomingTextSize="18sp">
 
         </com.stfalcon.chatkit.messages.MessagesList>
 
         <com.stfalcon.chatkit.messages.MessageInput
             android:id="@+id/input"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.25"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05"
             app:inputHint="@string/write_a_message"
-            app:showAttachmentButton="true"
-            app:attachmentButtonDefaultIconColor="@color/purple"
-            app:attachmentButtonDefaultIconPressedColor="@color/black"
             app:inputButtonHeight="30dp"
             app:inputButtonMargin="16dp"
             app:inputButtonWidth="30dp"
-            app:inputButtonDefaultIconColor="@color/green"
-            app:inputButtonDefaultBgPressedColor="@color/black"
+            app:inputButtonDefaultBgPressedColor="@color/purple"
             app:inputMaxLines="2"
             app:inputTextColor="@color/black"
             app:inputTextSize="18sp"
+
 
             />
 
