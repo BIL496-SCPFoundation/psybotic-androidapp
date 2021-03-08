@@ -45,17 +45,20 @@
         <com.stfalcon.chatkit.messages.MessageInput
             android:id="@+id/input"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.05"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
             app:inputHint="@string/write_a_message"
+            app:showAttachmentButton="true"
+            app:attachmentButtonDefaultIconColor="@color/purple"
+            app:attachmentButtonDefaultIconPressedColor="@color/black"
             app:inputButtonHeight="30dp"
             app:inputButtonMargin="16dp"
             app:inputButtonWidth="30dp"
+            app:inputButtonDefaultIconColor="@color/green"
             app:inputButtonDefaultBgPressedColor="@color/purple"
             app:inputMaxLines="2"
             app:inputTextColor="@color/black"
             app:inputTextSize="18sp"
-
 
             />
 

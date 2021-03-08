@@ -36,10 +36,10 @@ public class PsychologyActivity extends AppCompatActivity {
                 //validate and send message
                 //List<Message> messages = new ArrayList<>();
                 Message message = new Message(input.toString());
-                Message message2 = new Message("Heyoo!");
-                com.scpfoundation.psybotic.app.ui.chatbot.Author a = new Author();
-                a.setId(senderId);
-                message.setAuthor(a);
+                Message message2 = new Message("Hey dear!");
+                Author ab = new Author();
+                ab.setId(senderId);
+                message.setAuthor(ab);
 
                 //adapter.addToStart(message,true);
                 adapter.addToStart(message,true);
