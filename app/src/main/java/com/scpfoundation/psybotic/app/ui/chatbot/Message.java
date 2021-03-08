@@ -10,6 +10,22 @@ public class Message implements com.stfalcon.chatkit.commons.models.IMessage {
     Author author;
     Date createdAt;
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Message(String text){
         id = "1232";
         this.text = text;

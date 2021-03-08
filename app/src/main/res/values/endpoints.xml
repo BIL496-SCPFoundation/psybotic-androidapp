@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources [
+    <!ENTITY host "http://localhost:8081">
+    ]>
+
+<resources>
+    <string name="updateDeviceToken">&host;/users/updateDeviceToken</string>
+</resources>
