@@ -26,28 +26,37 @@ public class ChatBotActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chatbot);
         String senderId = "muhammed";
         ImageLoader imageLoader = null;
-        MessagesListAdapter<Message> adapter = new MessagesListAdapter<>(senderId, imageLoader);
+        MessagesListAdapter.HoldersConfig holdersConfig = new MessagesListAdapter.HoldersConfig();
+        holdersConfig.setIncomingLayout(R.layout.item_incoming_text_message);
+        holdersConfig.setOutcomingLayout(R.layout.item_outcoming_text_message);
+        MessagesListAdapter<Message> adapter = new MessagesListAdapter<>(senderId, holdersConfig,
+                imageLoader);
         ((MessagesList) findViewById(R.id.messagesList)).setAdapter(adapter);
         MessageInput minput = findViewById(R.id.input);
         minput.setInputListener(new MessageInput.InputListener() {
             @Override
             public boolean onSubmit(CharSequence input) {
                 //validate and send message
-
+                List<Message> messages = new ArrayList<>();
                 Message message = new Message(input.toString());
-//                List<Message> lis = new ArrayList<>();
-//                lis.add(message);
+                Message message2 = new Message("Heyoo!");
+                Author a = new Author();
+                a.setId(senderId);
+                message.setAuthor(a);
+                messages.add(message);
+                messages.add(message2);
+                //adapter.addToStart(message,true);
                 adapter.addToStart(message,true);
-
+                adapter.addToStart(message2,false);
                 return true;
             }
         });
-        minput.setAttachmentsListener(new MessageInput.AttachmentsListener() {
-            @Override
-            public void onAddAttachments() {
-                //select attachments
-            }
-        });
+
+
+
+
+
+
 
 
 

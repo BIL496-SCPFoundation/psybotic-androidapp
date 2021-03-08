@@ -19,6 +19,7 @@ import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.ui.login.LoginActivity;
 import com.scpfoundation.psybotic.app.ui.profile.ProfileActivity;
 import com.scpfoundation.psybotic.app.ui.chatbot.ChatBotActivity;
+import com.scpfoundation.psybotic.app.ui.psychologychat.PsychologyActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnCompleteListener<Void>{
 
@@ -57,7 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.psychologist_chat_view:
                 // go to psychologist chat page
-
+                Intent intentforPsychology = new Intent(this.getApplicationContext(), PsychologyActivity.class);
+                startActivity(intentforPsychology);
                 break;
             case R.id.notifications_view:
                 // go to notifications view

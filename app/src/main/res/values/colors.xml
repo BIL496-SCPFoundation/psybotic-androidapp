@@ -9,4 +9,6 @@
     <color name="green_dark">#2D5F28</color>
     <color name="purple">#701BE7</color>
     <color name="purple_dark">#462C6B</color>
+    <color name="brown">#1EF49836</color>
+    <color name="gray_dark">#17F7F0F0</color>
 </resources>
