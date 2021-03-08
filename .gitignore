@@ -13,5 +13,6 @@
 .externalNativeBuild
 .cxx
 .idea
-app/release
+.idea/compiler.xml
+.app/release
 app/debug

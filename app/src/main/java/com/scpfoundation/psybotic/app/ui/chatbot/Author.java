@@ -6,9 +6,9 @@ import com.stfalcon.chatkit.commons.models.IUser;
 public class Author implements IUser {
 
 
-    String id;
-    String name;
-    String avatar;
+    private String id;
+    private String name;
+    private String avatar;
 
     public void setId(String id) {
         this.id = id;

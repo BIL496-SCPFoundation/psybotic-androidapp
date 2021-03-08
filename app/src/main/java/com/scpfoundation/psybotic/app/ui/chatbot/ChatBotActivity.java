@@ -1,12 +1,23 @@
 package com.scpfoundation.psybotic.app.ui.chatbot;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
 import com.scpfoundation.psybotic.app.R;
 import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.commons.models.IMessage;
@@ -19,39 +30,71 @@ import java.util.List;
 
 public class ChatBotActivity extends AppCompatActivity {
 
+    GoogleSignInAccount account;
+    MessagesListAdapter<Message> adapter;
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Author author = new Author();
+            author.setId(intent.getExtras().getString("senderId"));
+            author.setName(intent.getExtras().getString("firstName"));
+            Message message = new Message(null);
+            message.setAuthor(author);
+            message.setText(intent.getExtras().getString("message"));
+            adapter.addToStart(message, true);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatbot);
-        String senderId = "muhammed";
+
+        LocalBroadcastManager.getInstance(this).registerReceiver((mMessageReceiver),
+                new IntentFilter("messageData"));
+        account = GoogleSignIn.getLastSignedInAccount(this);
+        Author self = new Author();
+        self.setName(account.getDisplayName());
+        self.setId(account.getId());
         ImageLoader imageLoader = null;
-        MessagesListAdapter<Message> adapter = new MessagesListAdapter<>(senderId, imageLoader);
+        MessagesListAdapter.HoldersConfig holdersConfig = new MessagesListAdapter.HoldersConfig();
+        holdersConfig.setIncomingLayout(R.layout.item_incoming_text_message);
+        holdersConfig.setOutcomingLayout(R.layout.item_outcoming_text_message);
+        MessagesListAdapter<Message> adapter = new MessagesListAdapter<>(account.getId(), holdersConfig,
+                imageLoader);
         ((MessagesList) findViewById(R.id.messagesList)).setAdapter(adapter);
         MessageInput minput = findViewById(R.id.input);
         minput.setInputListener(new MessageInput.InputListener() {
             @Override
             public boolean onSubmit(CharSequence input) {
                 //validate and send message
-
+                List<Message> messages = new ArrayList<>();
                 Message message = new Message(input.toString());
-//                List<Message> lis = new ArrayList<>();
-//                lis.add(message);
+                Message message2 = new Message("Heyoo!");
+                message.setAuthor(self);
+                messages.add(message);
+                messages.add(message2);
+                //adapter.addToStart(message,true);
                 adapter.addToStart(message,true);
-
+                adapter.addToStart(message2,false);
                 return true;
             }
         });
-        minput.setAttachmentsListener(new MessageInput.AttachmentsListener() {
-            @Override
-            public void onAddAttachments() {
-                //select attachments
-            }
-        });
+
+
+
+
+
+
 
 
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
 
+    }
 }
