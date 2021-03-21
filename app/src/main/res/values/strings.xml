@@ -53,5 +53,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="emergency_contacts_title">Emergency Contacts</string>
     <string name="add_ec_button_text">ADD NEW EMERGENCY CONTACT</string>
+    <string name="psychologists">Psychologists</string>
 
 </resources>

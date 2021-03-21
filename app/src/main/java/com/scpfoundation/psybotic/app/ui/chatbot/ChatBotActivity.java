@@ -33,18 +33,17 @@ public class ChatBotActivity extends AppCompatActivity {
 
     GoogleSignInAccount account;
     MessagesListAdapter<Message> adapter;
-    List<Message> messages;
     private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Author author = new Author();
-            //author.setId(intent.getExtras().getString("senderId"));
-            //author.setName(intent.getExtras().getString("firstName"));
+            author.setId(intent.getExtras().getString("senderId"));
+            author.setName(intent.getExtras().getString("firstName"));
             Message message = new Message("Hey there");
-            messages.add(message);
             message.setAuthor(author);
-            //message.setText(intent.getExtras().getString("message"));
-            adapter.addToEnd(messages, true);
+            message.setText(intent.getExtras().getString("message"));
+            adapter.addToStart(message, true);
+
         }
     };
 
@@ -69,25 +68,26 @@ public class ChatBotActivity extends AppCompatActivity {
         ((MessagesList) findViewById(R.id.messagesList)).setAdapter(adapter);
         MessageInput minput = findViewById(R.id.input);
         Intent tintent = getIntent();
-        messages = new ArrayList<>();
+
         minput.setInputListener(new MessageInput.InputListener() {
             @Override
             public boolean onSubmit(CharSequence input) {
                 //validate and send message
-
+                List<Message> messages = new ArrayList<>();
                 Message message = new Message(input.toString());
                 Message message2 = new Message("Heyoo!");
                 message.setAuthor(self);
                 messages.add(message);
-                //messages.add(message2);
+                messages.add(message2);
                 //adapter.addToStart(message,true);
                 tintent.putExtra("senderId",  self.getId());
                 tintent.putExtra("firstName",  self.getName());
                 tintent.putExtra("message",  message.getText());
-                //adapter.addToStart(message,true);
-                mMessageReceiver.onReceive(c,getIntent());
-                //adapter.addToEnd(messages,true);
-                //adapter.addToStart(message2,false);
+
+                adapter.addToStart(message,true);
+                //mMessageReceiver.onReceive(c,getIntent());
+
+                adapter.addToStart(message2,false);
                 return true;
             }
         });
