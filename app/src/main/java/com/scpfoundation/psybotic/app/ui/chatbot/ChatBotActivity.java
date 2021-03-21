@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 
@@ -32,16 +33,18 @@ public class ChatBotActivity extends AppCompatActivity {
 
     GoogleSignInAccount account;
     MessagesListAdapter<Message> adapter;
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+    List<Message> messages;
+    private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Author author = new Author();
-            author.setId(intent.getExtras().getString("senderId"));
-            author.setName(intent.getExtras().getString("firstName"));
-            Message message = new Message(null);
+            //author.setId(intent.getExtras().getString("senderId"));
+            //author.setName(intent.getExtras().getString("firstName"));
+            Message message = new Message("Hey there");
+            messages.add(message);
             message.setAuthor(author);
-            message.setText(intent.getExtras().getString("message"));
-            adapter.addToStart(message, true);
+            //message.setText(intent.getExtras().getString("message"));
+            adapter.addToEnd(messages, true);
         }
     };
 
@@ -52,6 +55,7 @@ public class ChatBotActivity extends AppCompatActivity {
 
         LocalBroadcastManager.getInstance(this).registerReceiver((mMessageReceiver),
                 new IntentFilter("messageData"));
+        Context c = this;
         account = GoogleSignIn.getLastSignedInAccount(this);
         Author self = new Author();
         self.setName(account.getDisplayName());
@@ -64,19 +68,26 @@ public class ChatBotActivity extends AppCompatActivity {
                 imageLoader);
         ((MessagesList) findViewById(R.id.messagesList)).setAdapter(adapter);
         MessageInput minput = findViewById(R.id.input);
+        Intent tintent = getIntent();
+        messages = new ArrayList<>();
         minput.setInputListener(new MessageInput.InputListener() {
             @Override
             public boolean onSubmit(CharSequence input) {
                 //validate and send message
-                List<Message> messages = new ArrayList<>();
+
                 Message message = new Message(input.toString());
                 Message message2 = new Message("Heyoo!");
                 message.setAuthor(self);
                 messages.add(message);
-                messages.add(message2);
+                //messages.add(message2);
                 //adapter.addToStart(message,true);
-                adapter.addToStart(message,true);
-                adapter.addToStart(message2,false);
+                tintent.putExtra("senderId",  self.getId());
+                tintent.putExtra("firstName",  self.getName());
+                tintent.putExtra("message",  message.getText());
+                //adapter.addToStart(message,true);
+                mMessageReceiver.onReceive(c,getIntent());
+                //adapter.addToEnd(messages,true);
+                //adapter.addToStart(message2,false);
                 return true;
             }
         });
