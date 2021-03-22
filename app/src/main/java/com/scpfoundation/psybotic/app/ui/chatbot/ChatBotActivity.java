@@ -20,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.scpfoundation.psybotic.app.R;
+import com.scpfoundation.psybotic.app.service.MessagingService;
 import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.commons.models.IMessage;
 import com.stfalcon.chatkit.messages.MessageInput;
@@ -54,7 +55,6 @@ public class ChatBotActivity extends AppCompatActivity {
 
         LocalBroadcastManager.getInstance(this).registerReceiver((mMessageReceiver),
                 new IntentFilter("messageData"));
-        Context c = this;
         account = GoogleSignIn.getLastSignedInAccount(this);
         Author self = new Author();
         self.setName(account.getDisplayName());
@@ -79,15 +79,19 @@ public class ChatBotActivity extends AppCompatActivity {
                 message.setAuthor(self);
                 messages.add(message);
                 messages.add(message2);
-                //adapter.addToStart(message,true);
-                tintent.putExtra("senderId",  self.getId());
-                tintent.putExtra("firstName",  self.getName());
-                tintent.putExtra("message",  message.getText());
 
                 adapter.addToStart(message,true);
-                //mMessageReceiver.onReceive(c,getIntent());
+                Bundle b = new Bundle();
 
-                adapter.addToStart(message2,false);
+                b.putInt("senderId",10);
+                b.putString("message",input.toString());
+                b.putString("senderFirstName","oğuz");
+                b.putString("senderLastName","andaş");
+                RemoteMessage rm = new RemoteMessage(b);
+
+                new MessagingService().onMessageReceived(rm);
+
+                //adapter.addToStart(message2,false);
                 return true;
             }
         });
