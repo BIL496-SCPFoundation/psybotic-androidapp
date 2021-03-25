@@ -81,15 +81,7 @@ public class ChatBotActivity extends AppCompatActivity {
                 messages.add(message2);
 
                 adapter.addToStart(message,true);
-                Bundle b = new Bundle();
 
-                b.putInt("senderId",10);
-                b.putString("message",input.toString());
-                b.putString("senderFirstName","oğuz");
-                b.putString("senderLastName","andaş");
-                RemoteMessage rm = new RemoteMessage(b);
-
-                new MessagingService().onMessageReceived(rm);
 
                 //adapter.addToStart(message2,false);
                 return true;
