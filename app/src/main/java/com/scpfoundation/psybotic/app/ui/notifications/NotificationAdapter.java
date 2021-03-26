@@ -48,6 +48,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         final Notification notification = notificationList.get(position);
         final TextView header_text = holder.Header;
+        System.out.println(notification.getTextHeader());
         header_text.setText(notification.getTextHeader());
         final TextView notification_text = holder.NotificationText;
         notification_text.setText(notification.getText());

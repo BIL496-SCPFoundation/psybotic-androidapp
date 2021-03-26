@@ -131,9 +131,7 @@ public class NotificationActivity extends AppCompatActivity   implements  View.O
     public void onResponse(JSONObject response) {
         Gson gson = new Gson();
         Notification u = gson.fromJson(response.toString(), Notification.class);
-
-
-
+        System.out.println(u);
         TextView header_Text = findViewById(R.id.notification_Header);
         header_Text.setText(u.getTextHeader());
 
