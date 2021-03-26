@@ -41,7 +41,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public NotificationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View contactView = inflater.inflate(R.layout.activity_notification, parent, false);
+        View contactView = inflater.inflate(R.layout.notification, parent, false);
         return new NotificationAdapter.ViewHolder(contactView);
     }
 
@@ -49,7 +49,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public void onBindViewHolder(@NonNull NotificationAdapter.ViewHolder holder, int position) {
 
         final Notification notification = notificationList.get(position);
-
         final TextView header_text = holder.Header;
         header_text.setText(notification.getTextHeader());
         final TextView notification_text = holder.NotificationText;
@@ -58,7 +57,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         notification_date.setText(notification.getSendingDate()+"");
         final TextView bildirim_icin_kalansure=holder.KalanSure;
         Date date = new Date(System.currentTimeMillis());
-        String kalansure=getDateDiff(date,notification.getSendingDate(),TimeUnit.HOURS)+"";
+        String kalansure;
+        if(notification.getSendingDate()!=null) {
+             kalansure= getDateDiff(date, notification.getSendingDate(), TimeUnit.HOURS) + "";
+        }
+        else
+            kalansure="Null Geldi";
         bildirim_icin_kalansure.setText(kalansure);
         final ImageButton iyiyim=holder.right;
         final ImageButton hastayim=holder.emergency;
@@ -73,7 +77,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     @Override
                     public void onResponse(JSONObject response) {
                         dialog.cancel();
-                        int index = notificationList.indexOf(notification)
+                        int index = notificationList.indexOf(notification);
                         notifyItemChanged(position);
 //                        notifyDataSetChanged();
                     }
@@ -139,7 +143,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                         "Loading. Please wait...", true);
 
                 requestQueue.add(req);
-                */
             }
         });
     }

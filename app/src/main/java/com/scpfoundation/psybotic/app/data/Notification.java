@@ -5,36 +5,35 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Notification {
-    private String notificationId;
+    private String id;
     private String userId;
     private String textHeader;
     private String text;
     private boolean status;
-    private boolean reply;
-    private Date sendingDate;
+    private boolean replied;
+    private Date createdDate;
     private Date replyDate;
 
     @Override
     public String toString() {
         return "Notification{" +
-                "notificationId='" + notificationId + '\'' +
+                "notificationId='" + id + '\'' +
                 ", userId='" + userId + '\'' +
                 ", textHeader='" + textHeader + '\'' +
                 ", text='" + text + '\'' +
                 ", status=" + status +
-                ", reply=" + reply +
-                ", sendingDate=" + sendingDate +
+                ", reply=" + replied +
+                ", sendingDate=" + createdDate +
                 ", replyDate=" + replyDate +
                 '}';
     }
 
-
-    public String getNotificationId() {
-        return notificationId;
+    public String getId() {
+        return id;
     }
 
-    public void setNotificationId(String notificationId) {
-        this.notificationId = notificationId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUserId() {
@@ -69,20 +68,20 @@ public class Notification {
         this.status = status;
     }
 
-    public boolean isReply() {
-        return reply;
+    public boolean isReplied() {
+        return replied;
     }
 
-    public void setReply(boolean reply) {
-        this.reply = reply;
+    public void setReplied(boolean replied) {
+        this.replied = replied;
     }
 
     public Date getSendingDate() {
-        return sendingDate;
+        return createdDate;
     }
 
     public void setSendingDate(Date sendingDate) {
-        this.sendingDate = sendingDate;
+        this.createdDate = sendingDate;
     }
 
     public Date getReplyDate() {
@@ -97,12 +96,12 @@ public class Notification {
         if (this == o) return true;
         if (!(o instanceof Notification)) return false;
         Notification that = (Notification) o;
-        return isStatus() == that.isStatus() && isReply() == that.isReply() && Objects.equals(getNotificationId(), that.getNotificationId()) && Objects.equals(getUserId(), that.getUserId()) && Objects.equals(getTextHeader(), that.getTextHeader()) && Objects.equals(getText(), that.getText()) && Objects.equals(getSendingDate(), that.getSendingDate()) && Objects.equals(getReplyDate(), that.getReplyDate());
+        return isStatus() == that.isStatus() && isReplied() == that.isReplied() && Objects.equals(getId(), that.getId()) && Objects.equals(getUserId(), that.getUserId()) && Objects.equals(getTextHeader(), that.getTextHeader()) && Objects.equals(getText(), that.getText()) && Objects.equals(getSendingDate(), that.getSendingDate()) && Objects.equals(getReplyDate(), that.getReplyDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNotificationId(), getUserId(), getTextHeader(), getText(), isStatus(), isReply(), getSendingDate(), getReplyDate());
+        return Objects.hash(getId(), getUserId(), getTextHeader(), getText(), isStatus(), isReplied(), getSendingDate(), getReplyDate());
     }
 
 }
