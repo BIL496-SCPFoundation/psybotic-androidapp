@@ -7,8 +7,8 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="407dp"
+        android:layout_height="194dp"
         android:layout_marginEnd="4dp"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,14 +20,14 @@
             android:id="@+id/notification_Header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginBottom="7dp"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/warning"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.342"
             tools:text="Notification Header" />
 
         <ImageButton
@@ -63,17 +63,19 @@
             android:layout_width="118dp"
             android:layout_height="109dp"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="31dp"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="64dp"
             tools:src="@drawable/ic_app_icon" />
 
         <TextView
             android:id="@+id/kalanSure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
             android:text="Kalan Sure"
-            tools:layout_editor_absoluteX="133dp"
-            tools:layout_editor_absoluteY="111dp" />
+            app:layout_constraintStart_toEndOf="@+id/warning"
+            app:layout_constraintTop_toTopOf="@+id/GerceklesmeTarihi" />
 
         <TextView
             android:id="@+id/LastDate"
@@ -81,46 +83,43 @@
             android:layout_height="22dp"
             android:ems="10"
             android:inputType="date"
-            tools:layout_editor_absoluteX="202dp"
-            tools:layout_editor_absoluteY="112dp" />
+            app:layout_constraintStart_toEndOf="@+id/kalanSure"
+            tools:layout_editor_absoluteY="156dp" />
 
         <TextView
             android:id="@+id/GerceklesmeTarihi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
             android:text="Gerceklesti:"
-            tools:layout_editor_absoluteX="135dp"
-            tools:layout_editor_absoluteY="90dp" />
+            app:layout_constraintStart_toEndOf="@+id/warning"
+            app:layout_constraintTop_toBottomOf="@+id/NotificationText" />
 
         <TextView
             android:id="@+id/NotificationDate"
             android:layout_width="94dp"
             android:layout_height="22dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="5dp"
             android:ems="10"
             android:inputType="date"
-            tools:layout_editor_absoluteX="203dp"
-            tools:layout_editor_absoluteY="85dp" />
+            app:layout_constraintBottom_toTopOf="@+id/LastDate"
+            app:layout_constraintStart_toEndOf="@+id/GerceklesmeTarihi"
+            app:layout_constraintTop_toBottomOf="@+id/NotificationText"
+            app:layout_constraintVertical_bias="0.848" />
 
         <TextView
             android:id="@+id/NotificationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="48dp"
             android:text="Burasi Bildirim Mesaji"
-            tools:layout_editor_absoluteX="136dp"
-            tools:layout_editor_absoluteY="40dp" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:elevation="10dp"
-            android:orientation="vertical"
-            app:cardCornerRadius="120dp"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="4dp"
-            tools:layout_editor_absoluteY="12dp">
-
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintEnd_toStartOf="@+id/Allright"
+            app:layout_constraintHorizontal_bias="0.023"
+            app:layout_constraintStart_toEndOf="@+id/warning"
+            app:layout_constraintTop_toBottomOf="@+id/notification_Header" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
