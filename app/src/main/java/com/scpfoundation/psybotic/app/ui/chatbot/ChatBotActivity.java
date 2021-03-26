@@ -17,9 +17,11 @@ import android.widget.EditText;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.scpfoundation.psybotic.app.R;
+import com.scpfoundation.psybotic.app.data.ChatMessage;
 import com.scpfoundation.psybotic.app.service.MessagingService;
 import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.commons.models.IMessage;
@@ -27,7 +29,9 @@ import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ChatBotActivity extends AppCompatActivity {
@@ -82,8 +86,17 @@ public class ChatBotActivity extends AppCompatActivity {
 
                 adapter.addToStart(message,true);
 
+                adapter.addToStart(message2,false);
+                // See documentation on defining a message payload.
+               /* ChatMessage cm = new ChatMessage(input.toString(),"Oğuz",
+                        "Andaş", DateFormat.getDateInstance().toString(),
+                        "chatbot",message.getId());*/
+                //senderID = kullanici ile ayni
+                //ReceiverID "chatbot"
+                //Volley
 
-                //adapter.addToStart(message2,false);
+
+
                 return true;
             }
         });
