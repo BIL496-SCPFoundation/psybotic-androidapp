@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="120dp"
+        android:layout_margin="10dp"
+        android:elevation="10dp"
+        tools:ignore="MissingConstraints">
+
+    </androidx.cardview.widget.CardView >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="16dp">
+
+
+        <TextView
+            android:id="@+id/notification_Header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/warning"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Notification Header" />
+
+        <ImageButton
+            android:id="@+id/Allright"
+            android:layout_width="34dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.934"
+            app:layout_constraintStart_toEndOf="@+id/kalanSure"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_check"
+            tools:ignore="MissingConstraints,VectorDrawableCompat" />
+
+        <ImageButton
+            android:id="@+id/NoIamBad"
+            android:layout_width="34dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="92dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/emergency_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/kalanSure"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_check"
+            tools:ignore="MissingConstraints,VectorDrawableCompat" />
+
+        <ImageView
+            android:id="@+id/warning"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="35dp"
+            tools:src="@drawable/ic_app_icon" />
+
+        <TextView
+            android:id="@+id/kalanSure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kalan Sure"
+            tools:layout_editor_absoluteX="133dp"
+            tools:layout_editor_absoluteY="111dp" />
+
+        <EditText
+            android:id="@+id/LastDate"
+            android:layout_width="94dp"
+            android:layout_height="22dp"
+            android:ems="10"
+            android:inputType="date"
+            tools:layout_editor_absoluteX="202dp"
+            tools:layout_editor_absoluteY="112dp" />
+
+        <TextView
+            android:id="@+id/GerceklesmeTarihi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gerceklesti:"
+            tools:layout_editor_absoluteX="135dp"
+            tools:layout_editor_absoluteY="90dp" />
+
+        <EditText
+            android:id="@+id/NotificationDate"
+            android:layout_width="94dp"
+            android:layout_height="22dp"
+            android:ems="10"
+            android:inputType="date"
+            tools:layout_editor_absoluteX="203dp"
+            tools:layout_editor_absoluteY="85dp" />
+
+        <TextView
+            android:id="@+id/NotificationText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Burasi Bildirim Mesaji"
+            tools:layout_editor_absoluteX="136dp"
+            tools:layout_editor_absoluteY="40dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
