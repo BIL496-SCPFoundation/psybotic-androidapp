@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -149,6 +150,8 @@ public class NotificationActivity extends AppCompatActivity   implements  View.O
 
         ImageButton iyiyim=findViewById(R.id.Allright);
         ImageButton hastayim=findViewById(R.id.NoIamBad);
+
+        ImageView LOGO=findViewById((R.id.warning));
 
         curNotification = u;
         editedNotification = u;

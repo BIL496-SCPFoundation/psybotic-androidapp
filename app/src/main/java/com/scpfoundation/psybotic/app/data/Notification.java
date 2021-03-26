@@ -1,6 +1,8 @@
 package com.scpfoundation.psybotic.app.data;
 
 
+import android.widget.ImageView;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,6 +15,7 @@ public class Notification {
     private boolean replied;
     private Date createdDate;
     private Date replyDate;
+    private ImageView imageView;
 
     @Override
     public String toString() {

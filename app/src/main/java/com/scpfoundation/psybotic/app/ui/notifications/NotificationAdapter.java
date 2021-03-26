@@ -2,11 +2,11 @@ package com.scpfoundation.psybotic.app.ui.notifications;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,9 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.scpfoundation.psybotic.app.R;
-import com.scpfoundation.psybotic.app.data.FamilyMember;
 import com.scpfoundation.psybotic.app.data.Notification;
-import com.scpfoundation.psybotic.app.ui.profile.FamilyMemberAdapter;
 
 import org.json.JSONObject;
 
@@ -66,13 +64,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         bildirim_icin_kalansure.setText(kalansure);
         final ImageButton iyiyim=holder.right;
         final ImageButton hastayim=holder.emergency;
-
+        final ImageView logo=holder.logo;
         iyiyim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestQueue requestQueue = Volley.newRequestQueue(iyiyim.getContext());;
+               // RequestQueue requestQueue = Volley.newRequestQueue(iyiyim.getContext());;
                 String url = HOST + "/notifications/update";
-                JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
+                /*JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
                         null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -103,13 +101,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                         "Loading. Please wait...", true);
 
                 requestQueue.add(req);
+                */
+
             }
         });
         hastayim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RequestQueue requestQueue = Volley.newRequestQueue(iyiyim.getContext());;
+                //RequestQueue requestQueue = Volley.newRequestQueue(iyiyim.getContext());;
                 String url = HOST + "/notifications/update";
+                /*
                 JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
                         null, new Response.Listener<JSONObject>() {
                     @Override
@@ -143,6 +144,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                         "Loading. Please wait...", true);
 
                 requestQueue.add(req);
+                */;
             }
         });
     }
@@ -162,6 +164,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         public TextView NotificationDate;
         public ImageButton right;
         public ImageButton emergency;
+        public ImageView logo;
         public ViewHolder(View itemView) {
             super(itemView);
             Header =  itemView.findViewById(R.id.notification_Header);
@@ -170,6 +173,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             NotificationText=itemView.findViewById(R.id.NotificationText);
             right=itemView.findViewById(R.id.Allright);
             emergency=itemView.findViewById(R.id.NoIamBad);
+            logo=itemView.findViewById(R.id.warning);
         }
     }
     private List<Notification> notificationList;
