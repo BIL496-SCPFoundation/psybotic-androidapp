@@ -87,7 +87,7 @@
             tools:layout_editor_absoluteX="133dp"
             tools:layout_editor_absoluteY="111dp" />
 
-        <EditText
+        <TextView
             android:id="@+id/LastDate"
             android:layout_width="94dp"
             android:layout_height="22dp"
@@ -104,7 +104,7 @@
             tools:layout_editor_absoluteX="135dp"
             tools:layout_editor_absoluteY="90dp" />
 
-        <EditText
+        <TextView
             android:id="@+id/NotificationDate"
             android:layout_width="94dp"
             android:layout_height="22dp"
