@@ -1,44 +1,243 @@
 package com.scpfoundation.psybotic.app.ui.notifications;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.media.Image;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.scpfoundation.psybotic.app.R;
+import com.scpfoundation.psybotic.app.data.FamilyMember;
+import com.scpfoundation.psybotic.app.data.Notification;
 import com.scpfoundation.psybotic.app.ui.profile.FamilyMemberAdapter;
 
-public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
+import org.json.JSONObject;
 
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
+    private static final String HOST = "https://limitless-lake-96203.herokuapp.com";
+    private ProgressDialog dialog;
 
     @NonNull
     @Override
     public NotificationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View contactView = inflater.inflate(R.layout.activity_notification, parent, false);
+        return new NotificationAdapter.ViewHolder(contactView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NotificationAdapter.ViewHolder holder, int position) {
 
-    }
+        final Notification notification = notificationList.get(position);
 
+        final TextView header_text = holder.Header;
+        header_text.setText(notification.getTextHeader());
+        final TextView notification_text = holder.NotificationText;
+        notification_text.setText(notification.getText());
+        final TextView notification_date=holder.NotificationDate;
+        notification_date.setText(notification.getSendingDate()+"");
+        final TextView bildirim_icin_kalansure=holder.KalanSure;
+        Date date = new Date(System.currentTimeMillis());
+        String kalansure=getDateDiff(date,notification.getSendingDate(),TimeUnit.HOURS)+"";
+        bildirim_icin_kalansure.setText(kalansure);
+        final ImageButton iyiyim=holder.right;
+        final ImageButton hastayim=holder.emergency;
+
+        iyiyim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                RequestQueue requestQueue = Volley.newRequestQueue(emailTextView.getContext());;
+                String url = HOST + "/familyMembers/update";
+                JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
+                        null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        dialog.cancel();
+                        int index = familyMemberList.indexOf(familyMember);
+                        applyButton.setVisibility(View.GONE);
+                        deleteButton.setVisibility(View.VISIBLE);
+
+                        holder.editMode = false;
+
+                        fnEdit.setVisibility(View.GONE);
+                        emailEdit.setVisibility(View.GONE);
+                        lnEdit.setVisibility(View.GONE);
+                        phoneEdit.setVisibility(View.GONE);
+
+                        fnTextView.setVisibility(View.VISIBLE);
+                        lnTextView.setVisibility(View.VISIBLE);
+                        emailTextView.setVisibility(View.VISIBLE);
+                        phoneTextView.setVisibility(View.VISIBLE);
+
+                        editImage.setImageResource(R.drawable.ic_pencil);
+                        notifyItemChanged(position);
+//                        notifyDataSetChanged();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error instanceof TimeoutError) {
+                            Toast.makeText(editButton.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(editButton.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.cancel();
+                        applyButton.setVisibility(View.GONE);
+                        deleteButton.setVisibility(View.VISIBLE);
+
+                        holder.editMode = false;
+
+                        fnEdit.setVisibility(View.GONE);
+                        emailEdit.setVisibility(View.GONE);
+                        lnEdit.setVisibility(View.GONE);
+                        phoneEdit.setVisibility(View.GONE);
+
+                        fnTextView.setVisibility(View.VISIBLE);
+                        lnTextView.setVisibility(View.VISIBLE);
+                        emailTextView.setVisibility(View.VISIBLE);
+                        phoneTextView.setVisibility(View.VISIBLE);
+
+                        editImage.setImageResource(R.drawable.ic_pencil);
+                    }
+                }) {
+                    @Override
+                    public byte[] getBody() {
+                        Gson gson = new Gson();
+                        String body = gson.toJson(familyMember);
+                        return body.getBytes();
+                    }
+                };
+                dialog = ProgressDialog.show(editButton.getContext(), "",
+                        "Loading. Please wait...", true);
+
+                requestQueue.add(req);
+                */
+            }
+        });
+        hastayim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                RequestQueue requestQueue = Volley.newRequestQueue(emailTextView.getContext());;
+                String url = HOST + "/familyMembers/update";
+                JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
+                        null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        dialog.cancel();
+                        int index = familyMemberList.indexOf(familyMember);
+                        applyButton.setVisibility(View.GONE);
+                        deleteButton.setVisibility(View.VISIBLE);
+
+                        holder.editMode = false;
+
+                        fnEdit.setVisibility(View.GONE);
+                        emailEdit.setVisibility(View.GONE);
+                        lnEdit.setVisibility(View.GONE);
+                        phoneEdit.setVisibility(View.GONE);
+
+                        fnTextView.setVisibility(View.VISIBLE);
+                        lnTextView.setVisibility(View.VISIBLE);
+                        emailTextView.setVisibility(View.VISIBLE);
+                        phoneTextView.setVisibility(View.VISIBLE);
+
+                        editImage.setImageResource(R.drawable.ic_pencil);
+                        notifyItemChanged(position);
+//                        notifyDataSetChanged();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error instanceof TimeoutError) {
+                            Toast.makeText(editButton.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(editButton.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.cancel();
+                        applyButton.setVisibility(View.GONE);
+                        deleteButton.setVisibility(View.VISIBLE);
+
+                        holder.editMode = false;
+
+                        fnEdit.setVisibility(View.GONE);
+                        emailEdit.setVisibility(View.GONE);
+                        lnEdit.setVisibility(View.GONE);
+                        phoneEdit.setVisibility(View.GONE);
+
+                        fnTextView.setVisibility(View.VISIBLE);
+                        lnTextView.setVisibility(View.VISIBLE);
+                        emailTextView.setVisibility(View.VISIBLE);
+                        phoneTextView.setVisibility(View.VISIBLE);
+
+                        editImage.setImageResource(R.drawable.ic_pencil);
+                    }
+                }) {
+                    @Override
+                    public byte[] getBody() {
+                        Gson gson = new Gson();
+                        String body = gson.toJson(familyMember);
+                        return body.getBytes();
+                    }
+                };
+                dialog = ProgressDialog.show(editButton.getContext(), "",
+                        "Loading. Please wait...", true);
+
+                requestQueue.add(req);
+                */
+            }
+        });
+    }
+    public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
+    }
     @Override
     public int getItemCount() {
         return 0;
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView Header;
         public TextView KalanSure;
+        public TextView NotificationText;
         public TextView NotificationDate;
-        public TextView LastDate;
         public ImageButton right;
         public ImageButton emergency;
         public ViewHolder(View itemView) {
             super(itemView);
+            Header =  itemView.findViewById(R.id.notification_Header);
+            KalanSure=itemView.findViewById(R.id.LastDate);
+            NotificationDate=itemView.findViewById(R.id.NotificationDate);
+            NotificationText=itemView.findViewById(R.id.NotificationText);
+            right=itemView.findViewById(R.id.Allright);
+            emergency=itemView.findViewById(R.id.NoIamBad);
         }
+    }
+    private List<Notification> notificationList;
+
+    public NotificationAdapter(List<Notification> notificationList) {
+        this.notificationList = notificationList;
     }
 
 
