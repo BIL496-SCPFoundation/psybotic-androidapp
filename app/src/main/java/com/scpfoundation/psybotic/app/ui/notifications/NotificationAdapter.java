@@ -66,31 +66,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         iyiyim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                RequestQueue requestQueue = Volley.newRequestQueue(emailTextView.getContext());;
-                String url = HOST + "/familyMembers/update";
+                RequestQueue requestQueue = Volley.newRequestQueue(iyiyim.getContext());;
+                String url = HOST + "/notifications/update";
                 JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
                         null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         dialog.cancel();
-                        int index = familyMemberList.indexOf(familyMember);
-                        applyButton.setVisibility(View.GONE);
-                        deleteButton.setVisibility(View.VISIBLE);
-
-                        holder.editMode = false;
-
-                        fnEdit.setVisibility(View.GONE);
-                        emailEdit.setVisibility(View.GONE);
-                        lnEdit.setVisibility(View.GONE);
-                        phoneEdit.setVisibility(View.GONE);
-
-                        fnTextView.setVisibility(View.VISIBLE);
-                        lnTextView.setVisibility(View.VISIBLE);
-                        emailTextView.setVisibility(View.VISIBLE);
-                        phoneTextView.setVisibility(View.VISIBLE);
-
-                        editImage.setImageResource(R.drawable.ic_pencil);
+                        int index = notificationList.indexOf(notification)
                         notifyItemChanged(position);
 //                        notifyDataSetChanged();
                     }
@@ -98,71 +81,38 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         if (error instanceof TimeoutError) {
-                            Toast.makeText(editButton.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(iyiyim.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(editButton.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(hastayim.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         }
                         dialog.cancel();
-                        applyButton.setVisibility(View.GONE);
-                        deleteButton.setVisibility(View.VISIBLE);
-
-                        holder.editMode = false;
-
-                        fnEdit.setVisibility(View.GONE);
-                        emailEdit.setVisibility(View.GONE);
-                        lnEdit.setVisibility(View.GONE);
-                        phoneEdit.setVisibility(View.GONE);
-
-                        fnTextView.setVisibility(View.VISIBLE);
-                        lnTextView.setVisibility(View.VISIBLE);
-                        emailTextView.setVisibility(View.VISIBLE);
-                        phoneTextView.setVisibility(View.VISIBLE);
-
-                        editImage.setImageResource(R.drawable.ic_pencil);
                     }
                 }) {
                     @Override
                     public byte[] getBody() {
                         Gson gson = new Gson();
-                        String body = gson.toJson(familyMember);
+                        String body = gson.toJson(notification);
                         return body.getBytes();
                     }
                 };
-                dialog = ProgressDialog.show(editButton.getContext(), "",
+                dialog = ProgressDialog.show(iyiyim.getContext(), "",
                         "Loading. Please wait...", true);
 
                 requestQueue.add(req);
-                */
             }
         });
         hastayim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                RequestQueue requestQueue = Volley.newRequestQueue(emailTextView.getContext());;
-                String url = HOST + "/familyMembers/update";
+                RequestQueue requestQueue = Volley.newRequestQueue(iyiyim.getContext());;
+                String url = HOST + "/notifications/update";
                 JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
                         null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         dialog.cancel();
-                        int index = familyMemberList.indexOf(familyMember);
-                        applyButton.setVisibility(View.GONE);
-                        deleteButton.setVisibility(View.VISIBLE);
+                        int index = notificationList.indexOf(notification);
 
-                        holder.editMode = false;
-
-                        fnEdit.setVisibility(View.GONE);
-                        emailEdit.setVisibility(View.GONE);
-                        lnEdit.setVisibility(View.GONE);
-                        phoneEdit.setVisibility(View.GONE);
-
-                        fnTextView.setVisibility(View.VISIBLE);
-                        lnTextView.setVisibility(View.VISIBLE);
-                        emailTextView.setVisibility(View.VISIBLE);
-                        phoneTextView.setVisibility(View.VISIBLE);
-
-                        editImage.setImageResource(R.drawable.ic_pencil);
                         notifyItemChanged(position);
 //                        notifyDataSetChanged();
                     }
@@ -170,37 +120,22 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         if (error instanceof TimeoutError) {
-                            Toast.makeText(editButton.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(hastayim.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(editButton.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(hastayim.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         }
                         dialog.cancel();
-                        applyButton.setVisibility(View.GONE);
-                        deleteButton.setVisibility(View.VISIBLE);
 
-                        holder.editMode = false;
-
-                        fnEdit.setVisibility(View.GONE);
-                        emailEdit.setVisibility(View.GONE);
-                        lnEdit.setVisibility(View.GONE);
-                        phoneEdit.setVisibility(View.GONE);
-
-                        fnTextView.setVisibility(View.VISIBLE);
-                        lnTextView.setVisibility(View.VISIBLE);
-                        emailTextView.setVisibility(View.VISIBLE);
-                        phoneTextView.setVisibility(View.VISIBLE);
-
-                        editImage.setImageResource(R.drawable.ic_pencil);
                     }
                 }) {
                     @Override
                     public byte[] getBody() {
                         Gson gson = new Gson();
-                        String body = gson.toJson(familyMember);
+                        String body = gson.toJson(notification);
                         return body.getBytes();
                     }
                 };
-                dialog = ProgressDialog.show(editButton.getContext(), "",
+                dialog = ProgressDialog.show(hastayim.getContext(), "",
                         "Loading. Please wait...", true);
 
                 requestQueue.add(req);
@@ -214,7 +149,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
     @Override
     public int getItemCount() {
-        return 0;
+        return notificationList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
