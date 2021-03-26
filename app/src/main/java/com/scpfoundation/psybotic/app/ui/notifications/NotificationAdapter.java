@@ -45,7 +45,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull NotificationAdapter.ViewHolder holder, int position) {
-
+        final TextView notification_size=holder.size;
+        notification_size.setText(notificationList.size());
         final Notification notification = notificationList.get(position);
         final TextView header_text = holder.Header;
         System.out.println(notification.getTextHeader());
@@ -166,6 +167,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         public ImageButton right;
         public ImageButton emergency;
         public ImageView logo;
+        public TextView size;
         public ViewHolder(View itemView) {
             super(itemView);
             Header =  itemView.findViewById(R.id.notification_Header);
@@ -175,6 +177,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             right=itemView.findViewById(R.id.Allright);
             emergency=itemView.findViewById(R.id.NoIamBad);
             logo=itemView.findViewById(R.id.warning);
+            size=itemView.findViewById(R.id.Notification_sizes);
         }
     }
     private List<Notification> notificationList;
