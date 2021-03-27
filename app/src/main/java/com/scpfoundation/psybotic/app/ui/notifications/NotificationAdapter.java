@@ -108,6 +108,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 Intent intent = new Intent(v.getContext(), PsychologyActivity.class);
                 deleteItem(position,holder);
                 v.getContext().startActivity(intent);
+                //TO DO
                 /*
                 JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
                         null, new Response.Listener<JSONObject>() {
