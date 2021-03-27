@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/app_icon_rounded"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity android:name=".ui.profile.ProfileActivity" -->
         <service android:name=".service.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

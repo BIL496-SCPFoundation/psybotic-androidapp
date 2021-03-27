@@ -21,7 +21,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
+    <string name="view_notification">View Notification</string>
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
@@ -37,7 +37,7 @@
     <string name="e_mail_hint">E-mail</string>
     <string name="city_hint">City-Province</string>
     <string name="family_members_title">Family Members</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="notification_title">Notifications</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="phone_number_hint">Phone number</string>
     <string name="add_fm_button_text">ADD NEW FAMILY MEMBER</string>
