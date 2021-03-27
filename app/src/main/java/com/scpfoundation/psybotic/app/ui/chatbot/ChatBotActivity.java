@@ -5,23 +5,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.gson.Gson;
 import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.data.ChatMessage;
+import com.scpfoundation.psybotic.app.data.User;
 import com.scpfoundation.psybotic.app.service.MessagingService;
 import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.commons.models.IMessage;
@@ -38,6 +46,7 @@ public class ChatBotActivity extends AppCompatActivity {
 
     GoogleSignInAccount account;
     MessagesListAdapter<Message> adapter;
+    private ProgressDialog dialog;
     private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -56,7 +65,7 @@ public class ChatBotActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatbot);
-
+        RequestQueue requestQueue = Volley.newRequestQueue(this.getApplicationContext());
         LocalBroadcastManager.getInstance(this).registerReceiver((mMessageReceiver),
                 new IntentFilter("messageData"));
         account = GoogleSignIn.getLastSignedInAccount(this);
@@ -71,7 +80,6 @@ public class ChatBotActivity extends AppCompatActivity {
                 imageLoader);
         ((MessagesList) findViewById(R.id.messagesList)).setAdapter(adapter);
         MessageInput minput = findViewById(R.id.input);
-        Intent tintent = getIntent();
 
         minput.setInputListener(new MessageInput.InputListener() {
             @Override
@@ -88,26 +96,22 @@ public class ChatBotActivity extends AppCompatActivity {
 
                 adapter.addToStart(message2,false);
                 // See documentation on defining a message payload.
-               /* ChatMessage cm = new ChatMessage(input.toString(),"Oğuz",
+                ChatMessage cm = new ChatMessage(input.toString(),"Oğuz",
                         "Andaş", DateFormat.getDateInstance().toString(),
-                        "chatbot",message.getId());*/
-                //senderID = kullanici ile ayni
-                //ReceiverID "chatbot"
-                //Volley
+                        "chatbot",message.getId());
 
+
+
+                JsonObjectRequest req = reqChat(cm);
+                dialog = ProgressDialog.show(minput.getContext(), "",
+                        "Loading. Please wait...", true);
+                requestQueue.add(req);
+                System.out.println(req.toString());
 
 
                 return true;
             }
         });
-
-
-
-
-
-
-
-
 
     }
 
@@ -116,5 +120,30 @@ public class ChatBotActivity extends AppCompatActivity {
         super.onStop();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
 
+    }
+
+    protected JsonObjectRequest reqChat(ChatMessage cm) {
+        String HOST = "https://limitless-lake-96203.herokuapp.com";
+        String url = HOST + "/firebase/sendMessage";
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
+                null, response -> {
+            if (dialog != null) {
+                dialog.cancel();
+            }
+
+        }, error -> {
+            if (dialog != null) {
+                dialog.cancel();
+            }
+            System.err.println(error.getMessage());
+        }) {
+            @Override
+            public byte[] getBody() {
+                Gson gson = new Gson();
+                String body = gson.toJson(cm);
+                return body.getBytes();
+            }
+        };
+        return req;
     }
 }
