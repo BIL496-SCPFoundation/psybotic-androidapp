@@ -8,23 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.data.Notification;
-
-import org.json.JSONObject;
 
 import java.util.Date;
 import java.util.List;
@@ -45,8 +35,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull NotificationAdapter.ViewHolder holder, int position) {
-        final TextView notification_size=holder.size;
-        notification_size.setText(notificationList.size());
         final Notification notification = notificationList.get(position);
         final TextView header_text = holder.Header;
         System.out.println(notification.getTextHeader());
@@ -171,12 +159,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         public ViewHolder(View itemView) {
             super(itemView);
             Header =  itemView.findViewById(R.id.notification_Header);
-            KalanSure=itemView.findViewById(R.id.LastDate);
-            NotificationDate=itemView.findViewById(R.id.NotificationDate);
+            KalanSure=itemView.findViewById(R.id.due_date);
+            NotificationDate=itemView.findViewById(R.id.sending_date);
             NotificationText=itemView.findViewById(R.id.NotificationText);
             right=itemView.findViewById(R.id.Allright);
             emergency=itemView.findViewById(R.id.NoIamBad);
-            logo=itemView.findViewById(R.id.warning);
             size=itemView.findViewById(R.id.Notification_sizes);
         }
     }

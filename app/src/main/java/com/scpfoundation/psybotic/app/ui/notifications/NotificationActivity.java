@@ -16,11 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.scpfoundation.psybotic.app.R;
-import com.scpfoundation.psybotic.app.data.FamilyMember;
 import com.scpfoundation.psybotic.app.data.Notification;
-import com.scpfoundation.psybotic.app.data.User;
-import com.scpfoundation.psybotic.app.request.FamilyMemberSubmitRequest;
-import com.scpfoundation.psybotic.app.ui.profile.FamilyMemberAdapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -138,10 +134,10 @@ public class NotificationActivity extends AppCompatActivity   implements  View.O
         TextView notification_Text = findViewById(R.id.NotificationText);
         notification_Text.setText(u.getText());
 
-        TextView notification_Date = findViewById(R.id.NotificationDate);
+        TextView notification_Date = findViewById(R.id.sending_date);
         notification_Date.setText(u.getSendingDate()+"");
 
-        TextView notification_last_time = findViewById(R.id.GerceklesmeTarihi);
+        TextView notification_last_time = findViewById(R.id.sending_date_info);
         Date date = new Date(System.currentTimeMillis());
         String kalansure=getDateDiff(date,u.getSendingDate(), TimeUnit.HOURS)+"";
         notification_last_time.setText(kalansure);
@@ -149,7 +145,7 @@ public class NotificationActivity extends AppCompatActivity   implements  View.O
         ImageButton iyiyim=findViewById(R.id.Allright);
         ImageButton hastayim=findViewById(R.id.NoIamBad);
 
-        ImageView LOGO=findViewById((R.id.warning));
+
 
         curNotification = u;
         editedNotification = u;

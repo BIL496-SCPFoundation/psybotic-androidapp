@@ -6,47 +6,51 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="405dp"
-        android:layout_height="194dp"
-        android:layout_marginTop="130dp"
-        android:layout_marginBottom="50dp"
+        android:id="@+id/screen"
+        android:layout_width="408dp"
+        android:layout_height="220dp"
+        android:background="@color/purple_dark"
         android:padding="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="40dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintCircleRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:paddingRight="20dp"
+        tools:visibility="visible">
 
 
         <TextView
             android:id="@+id/notification_Header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="7dp"
-            android:textColor="#F10505"
-            android:textSize="36sp"
+            android:layout_width="355dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="28dp"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/warning"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.285"
             tools:text="Notification Header" />
 
         <ImageButton
             android:id="@+id/Allright"
             android:layout_width="34dp"
             android:layout_height="39dp"
-            android:layout_marginTop="76dp"
+            android:layout_marginTop="96dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/ic_check"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/kalanSure"
+            app:layout_constraintHorizontal_bias="0.901"
+            app:layout_constraintStart_toEndOf="@+id/due_date_info"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_check"
             tools:ignore="MissingConstraints,VectorDrawableCompat" />
@@ -55,81 +59,70 @@
             android:id="@+id/NoIamBad"
             android:layout_width="34dp"
             android:layout_height="39dp"
-            android:layout_marginTop="136dp"
+            android:layout_marginTop="140dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/ic_boy"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@id/kalanSure"
+            app:layout_constraintHorizontal_bias="0.922"
+            app:layout_constraintStart_toEndOf="@id/due_date_info"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_check"
             tools:ignore="MissingConstraints,VectorDrawableCompat" />
 
-        <ImageView
-            android:id="@+id/warning"
-            android:layout_width="118dp"
-            android:layout_height="109dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="61dp"
-            tools:src="@drawable/ic_app_icon" />
-
         <TextView
-            android:id="@+id/kalanSure"
+            android:id="@+id/due_date_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="28dp"
             android:text="Kalan Sure"
-            app:layout_constraintStart_toEndOf="@+id/warning"
-            app:layout_constraintTop_toTopOf="@+id/GerceklesmeTarihi" />
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="@+id/sending_date_info"
+            tools:layout_editor_absoluteX="16dp" />
 
         <TextView
-            android:id="@+id/LastDate"
+            android:id="@+id/due_date"
             android:layout_width="94dp"
             android:layout_height="22dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="66dp"
+            android:layout_marginTop="76dp"
             android:ems="10"
             android:inputType="date"
-            app:layout_constraintStart_toEndOf="@+id/kalanSure"
+            app:layout_constraintStart_toEndOf="@+id/due_date_info"
             app:layout_constraintTop_toTopOf="@+id/NotificationText" />
 
         <TextView
-            android:id="@+id/GerceklesmeTarihi"
+            android:id="@+id/sending_date_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
             android:text="Gerceklesti:"
-            app:layout_constraintStart_toEndOf="@+id/warning"
-            app:layout_constraintTop_toBottomOf="@+id/NotificationText" />
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/NotificationText"
+            tools:layout_editor_absoluteX="16dp" />
 
         <TextView
-            android:id="@+id/NotificationDate"
+            android:id="@+id/sending_date"
             android:layout_width="94dp"
             android:layout_height="22dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="39dp"
             android:layout_marginBottom="5dp"
             android:ems="10"
             android:inputType="date"
-            app:layout_constraintBottom_toTopOf="@+id/LastDate"
-            app:layout_constraintStart_toEndOf="@+id/GerceklesmeTarihi"
+            app:layout_constraintBottom_toTopOf="@+id/due_date"
+            app:layout_constraintStart_toEndOf="@+id/sending_date_info"
             app:layout_constraintTop_toTopOf="@+id/NotificationText"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/NotificationText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="36dp"
+            android:layout_width="249dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="24dp"
             android:text="Burasi Bildirim Mesaji"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@+id/Allright"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/warning"
             app:layout_constraintTop_toBottomOf="@+id/notification_Header" />
 
 
