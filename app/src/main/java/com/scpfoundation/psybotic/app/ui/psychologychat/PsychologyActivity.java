@@ -3,6 +3,7 @@ package com.scpfoundation.psybotic.app.ui.psychologychat;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.ui.chatbot.Author;
@@ -11,6 +12,8 @@ import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,9 @@ public class PsychologyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_psychology);
         String senderId = "o";
         ImageLoader imageLoader = null;
+        String na = (String) getIntent().getExtras().get("psychology_name");
+        TextView t = findViewById(R.id.empt_title);
+        t.setText(na);
         MessagesListAdapter.HoldersConfig holdersConfig = new MessagesListAdapter.HoldersConfig();
         holdersConfig.setIncomingLayout(R.layout.item_incoming_text_message);
         holdersConfig.setOutcomingLayout(R.layout.item_outcoming_text_message);

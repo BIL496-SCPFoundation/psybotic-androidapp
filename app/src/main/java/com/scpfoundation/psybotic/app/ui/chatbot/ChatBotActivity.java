@@ -98,7 +98,7 @@ public class ChatBotActivity extends AppCompatActivity {
                 // See documentation on defining a message payload.
                 ChatMessage cm = new ChatMessage(input.toString(),"Oğuz",
                         "Andaş", DateFormat.getDateInstance().toString(),
-                        "chatbot",message.getId());
+                        "chatbot",account.getId());
 
 
 
@@ -107,8 +107,6 @@ public class ChatBotActivity extends AppCompatActivity {
                         "Loading. Please wait...", true);
                 requestQueue.add(req);
                 System.out.println(req.toString());
-
-
                 return true;
             }
         });
