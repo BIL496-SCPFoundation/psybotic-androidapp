@@ -87,11 +87,10 @@
                 android:paddingBottom="10dp">
 
                 <ImageView
-                    android:id="@+id/chat_with_ai_view_image"
+                    android:id="@+id/psychology_id_1"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.8"
-                    android:contentDescription="@string/profile_view_image"
 
                     />
 
@@ -109,7 +108,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/psychologist_chat_view"
+            android:id="@+id/psychology_2"
             android:layout_width="0dp"
             android:layout_height="150dp"
             android:layout_margin="20dp"
@@ -128,11 +127,10 @@
                 android:paddingBottom="10dp">
 
                 <ImageView
-                    android:id="@+id/psychologist_chat_view_image"
+                    android:id="@+id/psychology_id_2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.8"
-                    android:contentDescription="@string/profile_view_image"
 
                     />
 
@@ -148,6 +146,170 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/second_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/first_row"
+        >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/psychology_3"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="0.30"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="@color/white"
+            android:layout_margin="20dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+            <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+                <ImageView
+                    android:id="@+id/psychology_id_3"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_width="match_parent"
+                    />
+                <TextView
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/pr_muhammed"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/psychology_4"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="0.30"
+            android:padding="20dp"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="@color/white"
+            android:layout_margin="20dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+            <LinearLayout android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+                <ImageView
+                    android:id="@+id/psychology_id_4"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/profile_view_image"
+
+                    />
+                <TextView
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/pr_berat"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/third_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/second_row"
+        >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/psychology_5"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="0.30"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="@color/white"
+            android:layout_margin="20dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+            <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+                <ImageView
+                    android:id="@+id/psychology_id_5"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_width="match_parent"
+                    />
+                <TextView
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/pr_muhammed"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/psychology_6"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="0.30"
+            android:padding="20dp"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="@color/white"
+            android:layout_margin="20dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+            <LinearLayout android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+                <ImageView
+                    android:id="@+id/psychology_id_6"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/profile_view_image"
+
+                    />
+                <TextView
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/pr_berat"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 
     <ScrollView
