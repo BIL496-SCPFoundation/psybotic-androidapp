@@ -24,16 +24,21 @@
 <!--            </intent-filter>-->
 <!--        </service>-->
 
-        <activity android:name=".ui.psychologychat.PsychologistsNames"></activity>
         <activity
-            android:name=".ui.psychologychat.Psychologists"
+            android:name=".ui.psychologychat.PsychologistsNames"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".ui.psychologychat.Psychology"
             android:label="@string/title_activity_psychologists"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.profile.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity android:name=".ui.profile.ProfileActivity" -->
         <!-- android:label="Profile"/> -->
-        <activity android:name=".ui.psychologychat.PsychologyActivity" />
+        <activity android:name=".ui.psychologychat.PsychologyActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".ui.chatbot.ChatBotActivity"
             android:label="ChatBot" />
