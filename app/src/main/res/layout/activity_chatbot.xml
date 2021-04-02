@@ -54,7 +54,7 @@
             app:inputButtonMargin="16dp"
             app:inputButtonWidth="30dp"
             app:inputButtonDefaultBgPressedColor="@color/purple"
-            app:inputMaxLines="2"
+            app:inputMaxLines="3"
             app:inputTextColor="@color/black"
             app:inputTextSize="18sp"
 

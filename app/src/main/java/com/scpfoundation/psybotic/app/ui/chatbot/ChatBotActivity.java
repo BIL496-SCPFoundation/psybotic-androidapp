@@ -80,7 +80,7 @@ public class ChatBotActivity extends AppCompatActivity {
                 imageLoader);
         ((MessagesList) findViewById(R.id.messagesList)).setAdapter(adapter);
         MessageInput minput = findViewById(R.id.input);
-
+        adapter.addToStart(new Message("Hello, how may i help you?"),true);
         minput.setInputListener(new MessageInput.InputListener() {
             @Override
             public boolean onSubmit(CharSequence input) {

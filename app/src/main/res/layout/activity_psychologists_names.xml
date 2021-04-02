@@ -76,10 +76,10 @@
             android:layout_margin="20dp"
             android:layout_weight="0.30"
 
-            android:clickable="false"
+            android:clickable="true"
             android:focusable="true"
+            android:onClick="onClick"
             app:cardCornerRadius="50dp"
-
             android:foreground="?android:attr/selectableItemBackground"
             android:padding="20dp"
             app:cardBackgroundColor="@color/white"
@@ -108,9 +108,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
                     android:textSize="15sp"
-                    android:focusable="true"
-                    android:onClick="onClick"
-                    android:clickable="true"/>
+                    />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -121,8 +119,9 @@
             android:layout_height="150dp"
             android:layout_margin="20dp"
             android:layout_weight="0.30"
-            android:clickable="false"
+            android:clickable="true"
             android:focusable="true"
+            android:onClick="onClick"
             android:foreground="?android:attr/selectableItemBackground"
             android:padding="20dp"
             app:cardBackgroundColor="@color/white"
@@ -154,9 +153,7 @@
                     android:textColor="@color/colorPrimary"
 
                     android:textSize="15sp"
-                    android:focusable="true"
-                    android:onClick="onClick"
-                    android:clickable="true"/>
+                    />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -179,8 +176,9 @@
             app:cardBackgroundColor="@color/white"
             android:layout_margin="20dp"
             android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="false"
-            android:focusable="true">
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onClick">
             <LinearLayout
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
@@ -191,6 +189,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.8"
                     android:layout_width="match_parent"
+
                     />
                 <TextView
                     android:layout_height="0dp"
@@ -201,9 +200,7 @@
                     android:textSize="15sp"
                     android:textAlignment="center"
                     android:gravity="center"
-                    android:focusable="true"
-                    android:onClick="onClick"
-                    android:clickable="true"
+
                     />
             </LinearLayout>
 
@@ -219,7 +216,8 @@
             app:cardBackgroundColor="@color/white"
             android:layout_margin="20dp"
             android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="false"
+            android:clickable="true"
+            android:onClick="onClick"
             app:cardCornerRadius="50dp"
             android:focusable="true">
             <LinearLayout android:layout_height="match_parent"
@@ -243,9 +241,7 @@
                     android:textSize="15sp"
                     android:textAlignment="center"
                     android:gravity="center"
-                    android:focusable="true"
-                    android:onClick="onClick"
-                    android:clickable="true"
+
                     />
             </LinearLayout>
 
@@ -268,8 +264,9 @@
             app:cardBackgroundColor="@color/white"
             android:layout_margin="20dp"
             android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="false"
+            android:clickable="true"
             android:focusable="true"
+            android:onClick="onClick"
             app:cardCornerRadius="50dp"
             >
             <LinearLayout
@@ -282,6 +279,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.8"
                     android:layout_width="match_parent"
+
                     />
                 <TextView
                     android:layout_height="0dp"
@@ -292,9 +290,7 @@
                     android:textSize="15sp"
                     android:textAlignment="center"
                     android:gravity="center"
-                    android:focusable="true"
-                    android:onClick="onClick"
-                    android:clickable="true"
+
                     />
             </LinearLayout>
 
@@ -310,9 +306,10 @@
             app:cardBackgroundColor="@color/white"
             android:layout_margin="20dp"
             android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="false"
-            android:focusable="true"
+
             app:cardCornerRadius="50dp"
+            android:clickable="true"
+            android:focusable="true"
             android:onClick="onClick">
             <LinearLayout android:layout_height="match_parent"
                 android:layout_width="match_parent"
@@ -335,9 +332,7 @@
                     android:textSize="15sp"
                     android:textAlignment="center"
                     android:gravity="center"
-                    android:focusable="true"
-                    android:onClick="onClick"
-                    android:clickable="true"
+
                     />
             </LinearLayout>
 
