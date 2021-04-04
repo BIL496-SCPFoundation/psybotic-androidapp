@@ -11,6 +11,7 @@ public class User {
     private String city;
     private String maritalStatus;
     private String deviceToken;
+    private Double[] location;//first  longitude second latitude
 
     public String getDeviceToken() {
         return deviceToken;
@@ -18,6 +19,14 @@ public class User {
 
     public void setDeviceToken(String deviceToken) {
         this.deviceToken = deviceToken;
+    }
+
+    public Double[] getLocation() {
+        return location;
+    }
+
+    public void setLocation(Double[] location) {
+        this.location = location;
     }
 
     public String getId() {
