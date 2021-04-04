@@ -11,22 +11,22 @@
         android:roundIcon="@mipmap/app_icon_rounded"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.psychologychat.PsychologyInfo"></activity>
+        <activity android:name=".MainActivity" />
+
         <service android:name=".service.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-
-<!--        <service-->
-<!--            android:name=".service.MessagingService">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>-->
-<!--            </intent-filter>-->
-<!--        </service>-->
-
-        <activity android:name=".ui.psychologychat.PsychologistsNames"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+        </service> <!-- <service -->
+        <!-- android:name=".service.MessagingService"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
+        <activity
+            android:name=".ui.psychologychat.PsychologistsNames"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.psychologychat.PsychologyActivity"
             android:label="@string/title_activity_psychologists"
