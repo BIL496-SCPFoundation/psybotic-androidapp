@@ -18,6 +18,7 @@ import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.Auth;
@@ -29,6 +30,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
 import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.data.ChatMessage;
+import com.scpfoundation.psybotic.app.data.FireBaseSendMessageAO;
 import com.scpfoundation.psybotic.app.data.User;
 import com.scpfoundation.psybotic.app.service.MessagingService;
 import com.stfalcon.chatkit.commons.ImageLoader;
@@ -36,6 +38,8 @@ import com.stfalcon.chatkit.commons.models.IMessage;
 import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
+
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -98,11 +102,12 @@ public class ChatBotActivity extends AppCompatActivity {
                 // See documentation on defining a message payload.
                 ChatMessage cm = new ChatMessage(input.toString(),"Oğuz",
                         "Andaş", DateFormat.getDateInstance().toString(),
-                        "chatbot",account.getId());
+                        "112508789811138107089","110841579040674635754");
 
+                FireBaseSendMessageAO all_body = new FireBaseSendMessageAO("ChatBot",input.toString()
+                        ,"EaseToBody","aa",cm,self.getId());
 
-
-                JsonObjectRequest req = reqChat(cm);
+                JsonObjectRequest req = reqChat(all_body);
                 dialog = ProgressDialog.show(minput.getContext(), "",
                         "Loading. Please wait...", true);
                 requestQueue.add(req);
@@ -120,16 +125,18 @@ public class ChatBotActivity extends AppCompatActivity {
 
     }
 
-    protected JsonObjectRequest reqChat(ChatMessage cm) {
+    protected JsonObjectRequest reqChat(FireBaseSendMessageAO cm) {
         String HOST = "https://limitless-lake-96203.herokuapp.com";
         String url = HOST + "/firebase/sendMessage";
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
-                null, response -> {
+        return new JsonObjectRequest(Request.Method.POST, url,
+                null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
             if (dialog != null) {
                 dialog.cancel();
             }
 
-        }, error -> {
+        }}, error -> {
             if (dialog != null) {
                 dialog.cancel();
             }
@@ -142,6 +149,5 @@ public class ChatBotActivity extends AppCompatActivity {
                 return body.getBytes();
             }
         };
-        return req;
     }
 }
