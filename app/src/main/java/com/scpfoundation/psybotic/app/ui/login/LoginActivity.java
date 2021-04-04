@@ -5,6 +5,10 @@ package com.scpfoundation.psybotic.app.ui.login;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,7 +40,7 @@ import com.scpfoundation.psybotic.app.R;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener,
-        Response.Listener<JSONObject>, Response.ErrorListener{
+        Response.Listener<JSONObject>, Response.ErrorListener, LocationListener {
 
     private static final int RC_SIGN_IN = 100;
     private GoogleSignInClient mGoogleSignInClient;
@@ -44,6 +48,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private final String HOST = "https://limitless-lake-96203.herokuapp.com";
     private ProgressDialog dialog;
     private GoogleSignInAccount account;
+
+
+    protected LocationManager locationManager;
+    protected LocationListener locationListener;
+    String lat;
+
+    protected String latitude,longitude;
+
+    protected boolean gps_enabled,network_enabled;
+
+
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -86,6 +101,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             user.setLastName(account.getFamilyName());
             user.setGoogleId(account.getId());
             Context context = this;
+
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            LocationProvider provider=locationManager.getProvider(LocationManager.GPS_PROVIDER);
+            final boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            if(!gpsEnabled)
+            {
+                System.out.println("Izin problemi");
+            }
+            else
+            {
+                System.out.println(provider.getName());
+            }
+
+
+
             FirebaseMessaging.getInstance().getToken()
                     .addOnCompleteListener(new OnCompleteListener<String>() {
                         @Override
@@ -192,4 +222,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         dialog.cancel();
         updateUI(account);
     }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(@NonNull String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(@NonNull String provider) {
+
+    }
+
 }
