@@ -107,21 +107,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
+                System.out.println("Burda izin istenmedi");
+            }
+            else
+            {
+                System.out.println("Burda izin elsi");
             }
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-            LocationProvider provider=locationManager.getProvider(LocationManager.GPS_PROVIDER);
+            //LocationProvider provider=locationManager.getProvider(LocationManager.GPS_PROVIDER);
             Location lastKnownLocation = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
-            System.out.println(lastKnownLocation.getTime());
-            System.out.println(lastKnownLocation.getLatitude());
-            System.out.println(lastKnownLocation.getLongitude());
+            //System.out.println(lastKnownLocation.getTime());
+            System.out.println(lastKnownLocation);
+            System.out.println("latitude"+lastKnownLocation.getLatitude());
+            System.out.println("longitude"+lastKnownLocation.getLongitude());
+
+            LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000L,500.0f, this);
+            Location location = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            System.out.println(location.getLongitude());
+            System.out.println(location.getLatitude());
 
             /*locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             LocationProvider provider=locationManager.getProvider(LocationManager.GPS_PROVIDER);
