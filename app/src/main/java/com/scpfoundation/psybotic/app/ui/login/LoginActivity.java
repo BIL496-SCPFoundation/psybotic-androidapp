@@ -2,9 +2,11 @@ package com.scpfoundation.psybotic.app.ui.login;
 
 
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,6 +15,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.util.Log;
 import android.view.View;
@@ -102,9 +106,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             user.setGoogleId(account.getId());
             Context context = this;
 
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             LocationProvider provider=locationManager.getProvider(LocationManager.GPS_PROVIDER);
+            System.out.println(provider.getName());
+
+            /*locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            LocationProvider provider=locationManager.getProvider(LocationManager.GPS_PROVIDER);
             final boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
             if(!gpsEnabled)
             {
                 System.out.println("Izin problemi");
@@ -113,7 +123,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             {
                 System.out.println(provider.getName());
             }
-
+            */
 
 
             FirebaseMessaging.getInstance().getToken()
