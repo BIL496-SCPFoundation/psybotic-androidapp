@@ -24,7 +24,7 @@ public class PsychologistsNames extends AppCompatActivity {
 
 
     public void onClick(View v) {
-        Intent intent = new Intent(this.getApplicationContext(), PsychologyActivity.class);
+        Intent intent = new Intent(this.getApplicationContext(), PsychologyInfo.class);
         CardView cardView = (CardView) v;
         TextView textView = (TextView) ((LinearLayout) cardView.getChildAt(0)).getChildAt(1);
         intent.putExtra("psychology_name", textView.getText().toString());

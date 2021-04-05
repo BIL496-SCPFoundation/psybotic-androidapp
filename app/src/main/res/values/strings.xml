@@ -63,5 +63,6 @@
     <string name="pr_selen">Pr. Selen</string>
     <string name="pr_mert">Pr. Mert</string>
     <string name="EmptyString">..</string>
+    <string name="click_here_to_start_your_chat">Click Here to Start Your Chat!!</string>
 
 </resources>
