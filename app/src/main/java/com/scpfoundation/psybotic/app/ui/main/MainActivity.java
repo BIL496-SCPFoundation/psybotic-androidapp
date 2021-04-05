@@ -5,10 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -37,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         greetingsTextView= findViewById(R.id.greetings_text);
         account = (GoogleSignInAccount) getIntent().getExtras().get("account");
         String greetingText = (account != null) ?  "Welcome " + account.getDisplayName() : "Welcome dear guest";
+
+
         if (greetingsTextView != null) {
             greetingsTextView.setText(greetingText);
         }
@@ -48,10 +55,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else
         {
             System.out.println(ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION));
+            System.out.println("Sen mi Oldun acaba izin veirnce");
         }
 
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onClick(View v) {
 
@@ -80,6 +89,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.logout_icon:
                 signOut();
+                break;
+            case R.id.on_Confirm:
+                //To do if a user dont ask me again we dont reach confirm screen
+                System.out.println("Basildi");
+                //iF USER A CHOISE DONT ASK ME, WE dont rearch permission pages...
+
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
                 break;
             default:
                 System.err.println("Button not defined");
