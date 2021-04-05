@@ -2,8 +2,11 @@ package com.scpfoundation.psybotic.app.ui.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -37,6 +40,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (greetingsTextView != null) {
             greetingsTextView.setText(greetingText);
         }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            System.out.println("Burda izin istemesi Gerekiyordu");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+        else
+        {
+            System.out.println("Burda izin elsi");
+            System.out.println(ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION));
+        }
+
     }
 
     @Override

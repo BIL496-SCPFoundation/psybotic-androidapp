@@ -104,15 +104,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             user.setGoogleId(account.getId());
             Context context = this;
 
+            /*
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                System.out.println("Burda izin istenmedi");
-            }
-            else
-            {
-                System.out.println("Burda izin elsi");
-            }
+
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
             //LocationProvider provider=locationManager.getProvider(LocationManager.GPS_PROVIDER);
             Location lastKnownLocation = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
@@ -129,6 +124,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             System.out.println(location.getLongitude());
             System.out.println(location.getLatitude());
 
+            /*
+
+             */
             /*locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             LocationProvider provider=locationManager.getProvider(LocationManager.GPS_PROVIDER);
             final boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
