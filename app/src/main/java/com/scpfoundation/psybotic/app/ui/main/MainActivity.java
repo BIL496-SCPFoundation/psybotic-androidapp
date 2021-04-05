@@ -42,12 +42,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            System.out.println("Burda izin istemesi Gerekiyordu");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            System.out.println(ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION));
         }
         else
         {
-            System.out.println("Burda izin elsi");
             System.out.println(ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION));
         }
 
