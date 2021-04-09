@@ -739,7 +739,7 @@
                     android:id="@+id/ec_textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/emergency_contacts_title"
+                    android:text="@+string/emergency_contacts_title"
                     android:textColor="@color/white"
                     android:textStyle="bold"/>
 
@@ -752,7 +752,7 @@
                 app:layout_constraintTop_toBottomOf="@id/emergency_conctact_title_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/add_ec_button_text"
+                android:text="@+string/add_ec_button_text"
                 android:background="#ffffff"
                 android:textColor="@color/colorPrimary"
                 android:onClick="onClick"
