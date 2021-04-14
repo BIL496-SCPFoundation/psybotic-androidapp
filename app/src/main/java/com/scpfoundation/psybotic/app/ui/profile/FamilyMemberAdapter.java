@@ -69,7 +69,6 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
         public CardView deleteButton;
         public CardView applyButton;
         public ImageView editImage;
-        public ImageView applyImage;
 
         public boolean editMode;
 
@@ -169,7 +168,6 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
 
             }
         });
-
         lnEditText.setText(familyMember.getLastName());
 
         EditText emailEditTex = holder.emailEditText;
@@ -222,82 +220,15 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
         final CardView deleteButton = holder.deleteButton;
 
 
-        applyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RequestQueue requestQueue = Volley.newRequestQueue(emailTextView.getContext());;
-                String url = HOST + "/familyMembers/update";
-                JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
-                        null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        dialog.cancel();
-                        int index = familyMemberList.indexOf(familyMember);
-                        applyButton.setVisibility(View.GONE);
-                        deleteButton.setVisibility(View.VISIBLE);
-
-                        holder.editMode = false;
-
-                        fnEdit.setVisibility(View.GONE);
-                        emailEdit.setVisibility(View.GONE);
-                        lnEdit.setVisibility(View.GONE);
-                        phoneEdit.setVisibility(View.GONE);
-
-                        fnTextView.setVisibility(View.VISIBLE);
-                        lnTextView.setVisibility(View.VISIBLE);
-                        emailTextView.setVisibility(View.VISIBLE);
-                        phoneTextView.setVisibility(View.VISIBLE);
-
-                        editImage.setImageResource(R.drawable.ic_pencil);
-                        notifyItemChanged(position);
-//                        notifyDataSetChanged();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (error instanceof TimeoutError) {
-                            Toast.makeText(editButton.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(editButton.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                        dialog.cancel();
-                        applyButton.setVisibility(View.GONE);
-                        deleteButton.setVisibility(View.VISIBLE);
-
-                        holder.editMode = false;
-
-                        fnEdit.setVisibility(View.GONE);
-                        emailEdit.setVisibility(View.GONE);
-                        lnEdit.setVisibility(View.GONE);
-                        phoneEdit.setVisibility(View.GONE);
-
-                        fnTextView.setVisibility(View.VISIBLE);
-                        lnTextView.setVisibility(View.VISIBLE);
-                        emailTextView.setVisibility(View.VISIBLE);
-                        phoneTextView.setVisibility(View.VISIBLE);
-
-                        editImage.setImageResource(R.drawable.ic_pencil);
-                    }
-                }) {
-                    @Override
-                    public byte[] getBody() {
-                        Gson gson = new Gson();
-                        String body = gson.toJson(familyMember);
-                        return body.getBytes();
-                    }
-                };
-                dialog = ProgressDialog.show(editButton.getContext(), "",
-                        "Loading. Please wait...", true);
-
-                requestQueue.add(req);
-            }
-        });
-
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Show edit views
-                if (holder.editMode) {
+        applyButton.setOnClickListener(v -> {
+            RequestQueue requestQueue = Volley.newRequestQueue(emailTextView.getContext());;
+            String url = HOST + "/familyMembers/update";
+            JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
+                    null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    dialog.cancel();
+                    int index = familyMemberList.indexOf(familyMember);
                     applyButton.setVisibility(View.GONE);
                     deleteButton.setVisibility(View.VISIBLE);
 
@@ -314,75 +245,122 @@ public class FamilyMemberAdapter extends RecyclerView.Adapter<FamilyMemberAdapte
                     phoneTextView.setVisibility(View.VISIBLE);
 
                     editImage.setImageResource(R.drawable.ic_pencil);
-
-                } else { // hide edit views
-                    applyButton.setVisibility(View.VISIBLE);
-                    deleteButton.setVisibility(View.GONE);
-                    holder.editMode = true;
-
-                    fnTextView.setVisibility(View.GONE);
-                    lnTextView.setVisibility(View.GONE);
-                    emailTextView.setVisibility(View.GONE);
-                    phoneTextView.setVisibility(View.GONE);
-
-                    fnEdit.setVisibility(View.VISIBLE);
-                    emailEdit.setVisibility(View.VISIBLE);
-                    lnEdit.setVisibility(View.VISIBLE);
-                    phoneEdit.setVisibility(View.VISIBLE);
-
-                    editImage.setImageResource(R.drawable.ic_close);
+                    notifyItemChanged(position);
+//                        notifyDataSetChanged();
                 }
+            }, error -> {
+                if (error instanceof TimeoutError) {
+                    Toast.makeText(editButton.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(editButton.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+                dialog.cancel();
+                applyButton.setVisibility(View.GONE);
+                deleteButton.setVisibility(View.VISIBLE);
 
-            }
+                holder.editMode = false;
+
+                fnEdit.setVisibility(View.GONE);
+                emailEdit.setVisibility(View.GONE);
+                lnEdit.setVisibility(View.GONE);
+                phoneEdit.setVisibility(View.GONE);
+
+                fnTextView.setVisibility(View.VISIBLE);
+                lnTextView.setVisibility(View.VISIBLE);
+                emailTextView.setVisibility(View.VISIBLE);
+                phoneTextView.setVisibility(View.VISIBLE);
+
+                editImage.setImageResource(R.drawable.ic_pencil);
+            }) {
+                @Override
+                public byte[] getBody() {
+                    Gson gson = new Gson();
+                    String body = gson.toJson(familyMember);
+                    return body.getBytes();
+                }
+            };
+            dialog = ProgressDialog.show(editButton.getContext(), "",
+                    "Loading. Please wait...", true);
+
+            requestQueue.add(req);
         });
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(emailTextView.getContext())
-                        .setTitle("Delete family member")
-                        .setMessage("Are you sure you want to delete this family member?")
 
-                        // Specifying a listener allows you to take an action before dismissing the dialog.
-                        // The dialog is automatically dismissed when a dialog button is clicked.
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface _dialog, int which) {
-                                RequestQueue requestQueue = Volley.newRequestQueue(emailTextView.getContext());;
-                                String url = HOST + "/familyMembers/deleteById?id=" + familyMember.getId();
-                                JsonObjectRequest req = new JsonObjectRequest(Request.Method.DELETE, url,
-                                        null, new Response.Listener<JSONObject>() {
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        dialog.cancel();
-                                        int index = familyMemberList.indexOf(familyMember);
-                                        notifyItemRemoved(index);
-                                        familyMemberList.remove(familyMember);
-                                        notifyDataSetChanged();
-                                    }
-                                }, new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        if (error instanceof TimeoutError) {
-                                            Toast.makeText(editButton.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(editButton.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                        dialog.cancel();
-                                    }
-                                });
-                                dialog = ProgressDialog.show(editButton.getContext(), "",
-                                        "Loading. Please wait...", true);
+        editButton.setOnClickListener(v -> {
+            //Show edit views
+            if (holder.editMode) {
+                applyButton.setVisibility(View.GONE);
+                deleteButton.setVisibility(View.VISIBLE);
 
-                                requestQueue.add(req);
+                holder.editMode = false;
+
+                fnEdit.setVisibility(View.GONE);
+                emailEdit.setVisibility(View.GONE);
+                lnEdit.setVisibility(View.GONE);
+                phoneEdit.setVisibility(View.GONE);
+
+                fnTextView.setVisibility(View.VISIBLE);
+                lnTextView.setVisibility(View.VISIBLE);
+                emailTextView.setVisibility(View.VISIBLE);
+                phoneTextView.setVisibility(View.VISIBLE);
+
+                editImage.setImageResource(R.drawable.ic_pencil);
+
+            } else { // hide edit views
+                applyButton.setVisibility(View.VISIBLE);
+                deleteButton.setVisibility(View.GONE);
+                holder.editMode = true;
+
+                fnTextView.setVisibility(View.GONE);
+                lnTextView.setVisibility(View.GONE);
+                emailTextView.setVisibility(View.GONE);
+                phoneTextView.setVisibility(View.GONE);
+
+                fnEdit.setVisibility(View.VISIBLE);
+                emailEdit.setVisibility(View.VISIBLE);
+                lnEdit.setVisibility(View.VISIBLE);
+                phoneEdit.setVisibility(View.VISIBLE);
+
+                editImage.setImageResource(R.drawable.ic_close);
+            }
+
+        });
+        deleteButton.setOnClickListener(v -> new AlertDialog.Builder(emailTextView.getContext())
+                .setTitle("Delete family member")
+                .setMessage("Are you sure you want to delete this family member?")
+
+                // Specifying a listener allows you to take an action before dismissing the dialog.
+                // The dialog is automatically dismissed when a dialog button is clicked.
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface _dialog, int which) {
+                        RequestQueue requestQueue = Volley.newRequestQueue(emailTextView.getContext());;
+                        String url = HOST + "/familyMembers/deleteById?id=" + familyMember.getId();
+                        JsonObjectRequest req = new JsonObjectRequest(Request.Method.DELETE, url,
+                                null, response -> {
+                                    dialog.cancel();
+                                    int index = familyMemberList.indexOf(familyMember);
+                                    notifyItemRemoved(index);
+                                    familyMemberList.remove(familyMember);
+                                    notifyDataSetChanged();
+                                }, error -> {
+                            if (error instanceof TimeoutError) {
+                                Toast.makeText(editButton.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(editButton.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        })
+                            dialog.cancel();
+                        });
+                        dialog = ProgressDialog.show(editButton.getContext(), "",
+                                "Loading. Please wait...", true);
 
-                        // A null listener allows the button to dismiss the dialog and take no further action.
-                        .setNegativeButton(android.R.string.no, null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                        requestQueue.add(req);
+                    }
+                })
 
-            }
-        });
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show()
+        );
 
     }
 

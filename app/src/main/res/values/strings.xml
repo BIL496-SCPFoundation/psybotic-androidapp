@@ -42,5 +42,25 @@
     <string name="phone_number_hint">Phone number</string>
     <string name="add_fm_button_text">ADD NEW FAMILY MEMBER</string>
     <string name="write_a_message">Write A Message…</string>
+    <string name="title_activity_psychologists">Psychologists</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="emergency_contacts_title">Emergency Contacts</string>
+    <string name="add_ec_button_text">ADD NEW EMERGENCY CONTACT</string>
+    <string name="psychologists">Psychologists</string>
+    <string name="pr_mehmet">Pr. Mehmet</string>
+    <string name="pr_o_uz">Pr. Oğuz</string>
+    <string name="click_your_psychologist_to_make_a_c">Click Your Psychologist To Make A Chat</string>
+    <string name="pr_muhammed">Pr. Muhammed</string>
+    <string name="pr_berat">Pr. Berat</string>
+    <string name="pr_selen">Pr. Selen</string>
+    <string name="pr_mert">Pr. Mert</string>
+    <string name="EmptyString">..</string>
 
 </resources>

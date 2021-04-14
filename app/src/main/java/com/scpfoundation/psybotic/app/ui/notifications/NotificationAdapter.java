@@ -3,6 +3,7 @@ package com.scpfoundation.psybotic.app.ui.notifications;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,16 +43,20 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         final Notification notification = notificationList.get(position);
         final TextView header_text = holder.Header;
         System.out.println(notification.getTextHeader());
+        System.out.println(notification.getSendingDate());
         header_text.setText(notification.getTextHeader());
         final TextView notification_text = holder.NotificationText;
+
         notification_text.setText(notification.getText());
         final TextView notification_date=holder.NotificationDate;
         notification_date.setText(notification.getSendingDate()+"");
+        notification_date.setMovementMethod(new ScrollingMovementMethod());
         final TextView bildirim_icin_kalansure=holder.KalanSure;
+        bildirim_icin_kalansure.setMovementMethod(new ScrollingMovementMethod());
         Date date = new Date(System.currentTimeMillis());
         String kalansure;
         if(notification.getSendingDate()!=null) {
-             kalansure= getDateDiff(date, notification.getSendingDate(), TimeUnit.HOURS) + "";
+             kalansure= getDateDiff(date,notification.getSendingDate(), TimeUnit.HOURS) + " Saat Gecti. \n"+"Senin Icin Endiseliyiz,Sevdiklerine Haber verecegiz/verdik";
         }
         else
             kalansure="Null Geldi";
@@ -62,41 +67,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         iyiyim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // RequestQueue requestQueue = Volley.newRequestQueue(iyiyim.getContext());;
+                System.out.println(notification.toString());
                 String url = HOST + "/notifications/update";
                 deleteItem(position,holder);
-                /*JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
-                        null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        dialog.cancel();
-                        int index = notificationList.indexOf(notification);
-                        notifyItemChanged(position);
-//                        notifyDataSetChanged();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (error instanceof TimeoutError) {
-                            Toast.makeText(iyiyim.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(hastayim.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                        dialog.cancel();
-                    }
-                }) {
-                    @Override
-                    public byte[] getBody() {
-                        Gson gson = new Gson();
-                        String body = gson.toJson(notification);
-                        return body.getBytes();
-                    }
-                };
-                dialog = ProgressDialog.show(iyiyim.getContext(), "",
-                        "Loading. Please wait...", true);
 
-                requestQueue.add(req);
-                */
 
             }
         });
@@ -108,42 +82,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 Intent intent = new Intent(v.getContext(), PsychologyActivity.class);
                 deleteItem(position,holder);
                 v.getContext().startActivity(intent);
-                //TO DO
-                /*
-                JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url,
-                        null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        dialog.cancel();
-                        int index = notificationList.indexOf(notification);
 
-                        notifyItemChanged(position);
-//                        notifyDataSetChanged();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (error instanceof TimeoutError) {
-                            Toast.makeText(hastayim.getContext(), "Timeout", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(hastayim.getContext(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                        dialog.cancel();
-
-                    }
-                }) {
-                    @Override
-                    public byte[] getBody() {
-                        Gson gson = new Gson();
-                        String body = gson.toJson(notification);
-                        return body.getBytes();
-                    }
-                };
-                dialog = ProgressDialog.show(hastayim.getContext(), "",
-                        "Loading. Please wait...", true);
-
-                requestQueue.add(req);
-                */;
             }
         });
     }

@@ -13,7 +13,7 @@ public class Notification {
     private String text;
     private boolean status;
     private boolean replied;
-    private Date createdDate;
+    private Date sendingDate;
     private Date replyDate;
     private ImageView imageView;
 
@@ -26,7 +26,7 @@ public class Notification {
                 ", text='" + text + '\'' +
                 ", status=" + status +
                 ", reply=" + replied +
-                ", sendingDate=" + createdDate +
+                ", sendingDate=" + sendingDate +
                 ", replyDate=" + replyDate +
                 '}';
     }
@@ -80,11 +80,11 @@ public class Notification {
     }
 
     public Date getSendingDate() {
-        return createdDate;
+        return sendingDate;
     }
 
     public void setSendingDate(Date sendingDate) {
-        this.createdDate = sendingDate;
+        this.sendingDate = sendingDate;
     }
 
     public Date getReplyDate() {

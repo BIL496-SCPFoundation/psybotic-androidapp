@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private final String HOST = "https://limitless-lake-96203.herokuapp.com";
     private ProgressDialog dialog;
     private GoogleSignInAccount account;
+    private boolean alreadySigned = false;
 
 
     protected LocationManager locationManager;
@@ -73,8 +74,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         /*
          * Check if user already signed in via a google account, if yes go to MainActivity
          */
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
+            alreadySigned = true;
+            login(account);
             updateUI(account);
         }
     }
@@ -95,7 +98,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             account = completedTask.getResult(ApiException.class);
-
             // Signed in successfully, show authenticated UI.
             final User user = new User();
             user.setEmail(account.getEmail());
@@ -187,10 +189,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+            login(account);
+            showDialog(this);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-//            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             e.printStackTrace();
         }
     }
@@ -246,7 +249,65 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onResponse(JSONObject response) {
         dialog.cancel();
-        updateUI(account);
+        if (!alreadySigned) {
+            updateUI(account);
+        }
+    }
+
+    private User setUser(GoogleSignInAccount account) {
+        User user = new User();
+        user.setEmail(account.getEmail());
+        user.setFirstName(account.getGivenName());
+        user.setLastName(account.getFamilyName());
+        user.setGoogleId(account.getId());
+        return user;
+    }
+
+    private JsonObjectRequest createLoginRequest(User user) {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, HOST + "/users/login",
+            null, response -> {
+            if (dialog != null) {
+                dialog.cancel();
+            }
+                updateUI(account);
+            }, error -> {
+            if (dialog != null) {
+                dialog.cancel();
+            }
+                System.err.println(error.getMessage());
+            }) {
+            @Override
+            public byte[] getBody() {
+                Gson gson = new Gson();
+                String body = gson.toJson(user);
+                return body.getBytes();
+            }
+        };
+        return req;
+    }
+
+    private void login(GoogleSignInAccount account) {
+        final User user = setUser(account);
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    String token;
+                    if (!task.isSuccessful()) {
+                        Log.w("Device token exception", "Fetching FCM registration token failed", task.getException());
+                        return;
+                    } else {
+                        // Get new FCM registration token
+                        token = task.getResult();
+                        user.setDeviceToken(token);
+                    }
+                    Log.d("Device token: ", token);
+                    JsonObjectRequest req = createLoginRequest(user);
+                    requestQueue.add(req);
+                });
+    }
+
+    private void showDialog(Context context) {
+        dialog = ProgressDialog.show(context, "",
+                "Loading. Please wait...", true);
     }
 
     @Override

@@ -32,9 +32,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.scpfoundation.psybotic.app.R;
+import com.scpfoundation.psybotic.app.data.EmergencyContact;
 import com.scpfoundation.psybotic.app.data.FamilyMember;
 import com.scpfoundation.psybotic.app.data.User;
+import com.scpfoundation.psybotic.app.listener.EmergencyContactSubmitListener;
 import com.scpfoundation.psybotic.app.listener.FamilyMemberSubmitListener;
+import com.scpfoundation.psybotic.app.request.EmergencyContactSubmitRequest;
 import com.scpfoundation.psybotic.app.request.FamilyMemberSubmitRequest;
 import com.scpfoundation.psybotic.app.ui.util.DownloadImageTask;
 import com.wrapp.floatlabelededittext.FloatLabeledEditText;
@@ -59,11 +62,19 @@ public class ProfileActivity
     private ImageView profileImage;
     private ProgressBar imageLoading;
     private boolean editMode = false;
+
     RecyclerView familyMemberList;
     FamilyMemberAdapter familyMemberAdapter;
     ProgressBar loadingFamilyMembers;
     private FamilyMember newFamilyMember = new FamilyMember();
-    FamilyMemberSubmitRequest submitRequest;
+    FamilyMemberSubmitRequest fmSubmitRequest;
+
+    RecyclerView emergencyContactList;
+    EmergencyContactAdapter emergencyContactAdapter;
+    ProgressBar loadingEmergencyContacts;
+    private EmergencyContact newEmergencyContact = new EmergencyContact();
+    EmergencyContactSubmitRequest ecSubmitRequest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,12 +82,16 @@ public class ProfileActivity
         // initializing
         familyMemberList = findViewById(R.id.family_members_list);
         loadingFamilyMembers = findViewById(R.id.loading_family_members);
+
+        emergencyContactList = findViewById(R.id.emergency_contact_list);
+        loadingEmergencyContacts = findViewById(R.id.loading_emergency_contacts);
+
         account = (GoogleSignInAccount) getIntent().getExtras().get("account");
         requestQueue = Volley.newRequestQueue(this.getApplicationContext());
         imageLoading = findViewById(R.id.image_loading);
         profileImage = findViewById(R.id.profile_image);
         //new DownloadImageTask(profileImage, imageLoading)
-                //.execute(account.getPhotoUrl().toString());
+               //.execute(account.getPhotoUrl().toString());
 
         //find the user data
         String url = HOST + "/users/findById?id=" + account.getId();
@@ -84,41 +99,90 @@ public class ProfileActivity
                 null, this, this);
         requestQueue.add(req);
         getFamilyMembers();
+        getEmergencyContacts();
+        setupFm();
+        setupEc();
+    }
 
+    private void setupFm() {
         newFamilyMember.setSuperId(account.getId());
-        FamilyMemberSubmitListener listener = new FamilyMemberSubmitListener(newFamilyMember);
+        FamilyMemberSubmitListener fmListener = new FamilyMemberSubmitListener(newFamilyMember);
 
-        EditText fnCreate = findViewById(R.id.fm_fn_create_text);
-        fnCreate.addTextChangedListener(listener.new FirstNameListener());
+        EditText fmFnCreate = findViewById(R.id.fm_fn_create_text);
+        fmFnCreate.addTextChangedListener(fmListener.new FirstNameListener());
 
-        EditText lnCreate = findViewById(R.id.fm_ln_create_text);
-        lnCreate.addTextChangedListener(listener.new LastNameListener());
+        EditText fmLnCreate = findViewById(R.id.fm_ln_create_text);
+        fmLnCreate.addTextChangedListener(fmListener.new LastNameListener());
 
-        EditText emailCreate = findViewById(R.id.fm_email_create_text);
-        emailCreate.addTextChangedListener(listener.new EmailListener());
+        EditText fmEmailCreate = findViewById(R.id.fm_email_create_text);
+        fmEmailCreate.addTextChangedListener(fmListener.new EmailListener());
 
-        EditText phoneCreate = findViewById(R.id.fm_phone_create_text);
-        phoneCreate.addTextChangedListener(listener.new PhoneListener());
+        EditText fmPhoneCreate = findViewById(R.id.fm_phone_create_text);
+        fmPhoneCreate.addTextChangedListener(fmListener.new PhoneListener());
 
-        final ConstraintLayout constraintLayout = findViewById(R.id.fm_create_dialog);
+        final ConstraintLayout fmConstraintLayout = findViewById(R.id.fm_create_dialog);
 
-        submitRequest =
+        fmSubmitRequest =
                 new FamilyMemberSubmitRequest(newFamilyMember,
                         this,
-                        constraintLayout,
+                        fmConstraintLayout,
                         familyMemberAdapter);
 
         ImageButton submitButton = findViewById(R.id.fm_submit);
-        submitButton.setOnClickListener(submitRequest);
+        submitButton.setOnClickListener(fmSubmitRequest);
 
         ImageButton cancelSubmitButton = findViewById(R.id.fm_cancel_submit);
-        cancelSubmitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                constraintLayout.setVisibility(View.GONE);
-            }
-        });
+        cancelSubmitButton.setOnClickListener(v -> fmConstraintLayout.setVisibility(View.GONE));
 
+    }
+
+    private void setupEc() {
+        newEmergencyContact.setSuperId(account.getId());
+        EmergencyContactSubmitListener ecListener = new EmergencyContactSubmitListener(newEmergencyContact);
+
+        EditText ecFnCreate = findViewById(R.id.ec_fn_create_text);
+        ecFnCreate.addTextChangedListener(ecListener.new FirstNameListener());
+
+        EditText ecLnCreate = findViewById(R.id.ec_ln_create_text);
+        ecLnCreate.addTextChangedListener(ecListener.new LastNameListener());
+
+        EditText ecEmailCreate = findViewById(R.id.ec_email_create_text);
+        ecEmailCreate.addTextChangedListener(ecListener.new EmailListener());
+
+        EditText ecPhoneCreate = findViewById(R.id.ec_phone_create_text);
+        ecPhoneCreate.addTextChangedListener(ecListener.new PhoneListener());
+
+        final ConstraintLayout ecConstraintLayout = findViewById(R.id.ec_create_dialog);
+
+        ecSubmitRequest =
+                new EmergencyContactSubmitRequest(newEmergencyContact,
+                        this,
+                        ecConstraintLayout,
+                        emergencyContactAdapter);
+
+        ImageButton submitButton = findViewById(R.id.ec_submit);
+        submitButton.setOnClickListener(ecSubmitRequest);
+
+        ImageButton cancelSubmitButton = findViewById(R.id.ec_cancel_submit);
+        cancelSubmitButton.setOnClickListener(v -> ecConstraintLayout.setVisibility(View.GONE));
+
+    }
+    private void getEmergencyContacts() {
+        String url = HOST + "/users/emergencyContacts?userId=" + account.getId();
+        loadingEmergencyContacts.setVisibility(View.VISIBLE);
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, url,
+                null, response -> {
+            loadingEmergencyContacts.setVisibility(View.GONE);
+            Gson gson = new Gson();
+            Type type = new TypeToken<ArrayList<EmergencyContact>>(){}.getType();
+            List<EmergencyContact> emergencyContacts =
+                    gson.fromJson(response.toString(), type);
+            emergencyContactAdapter = new EmergencyContactAdapter(emergencyContacts);
+            ecSubmitRequest.setAdapter(emergencyContactAdapter);
+            emergencyContactList.setAdapter(emergencyContactAdapter);
+            emergencyContactList.setLayoutManager(new LinearLayoutManager(getAppContext()));
+        }, this);
+        requestQueue.add(req);
     }
 
     public void showToast(String msg) {
@@ -142,6 +206,9 @@ public class ProfileActivity
                 ConstraintLayout cl = findViewById(R.id.fm_create_dialog);
                 cl.setVisibility(View.VISIBLE);
                 break;
+            case R.id.add_ec_button:
+                ConstraintLayout c2 = findViewById(R.id.ec_create_dialog);
+                c2.setVisibility(View.VISIBLE);
             default:
                 System.err.println("Button is not defined");
         }
@@ -331,7 +398,7 @@ public class ProfileActivity
                 List<FamilyMember> familyMembers =
                         (List<FamilyMember>) gson.fromJson(response.toString(), type);
                 familyMemberAdapter = new FamilyMemberAdapter(familyMembers);
-                submitRequest.setAdapter(familyMemberAdapter);
+                fmSubmitRequest.setAdapter(familyMemberAdapter);
                 familyMemberList.setAdapter(familyMemberAdapter);
                 familyMemberList.setLayoutManager(new LinearLayoutManager(getAppContext()));
 //                familyMemberList.setNestedScrollingEnabled(false);

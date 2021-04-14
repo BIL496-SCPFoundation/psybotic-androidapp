@@ -2,16 +2,35 @@ package com.scpfoundation.psybotic.app.ui.chatbot;
 
 import java.util.Date;
 
+import static java.lang.Math.random;
+
 public class Message implements com.stfalcon.chatkit.commons.models.IMessage {
 
 
-    String id;
-    String text;
-    Author author;
+    private String id;
+    private String text;
+    private Author author;
+
     Date createdAt;
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Message(String text){
-        id = "1232";
+        id = "12123";
         this.text = text;
         author = new Author();
         createdAt = new Date();

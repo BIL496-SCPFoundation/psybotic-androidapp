@@ -5,6 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.psychologychat.PsychologyActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+    <TextView
+        android:id="@+id/empt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/EmptyString"
+        android:textColor="@color/title"
+        android:textSize="20sp"/>
+    </androidx.appcompat.widget.Toolbar>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,9 +39,27 @@
             android:id="@+id/messagesList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.75"
+            android:layout_weight="0.95"
 
-            >
+
+            app:incomingDefaultBubbleColor="@color/white"
+            app:incomingDefaultBubblePressedColor="@color/cornflower_blue_two_dark"
+            app:incomingDefaultBubbleSelectedColor="@color/gray"
+            app:incomingDefaultImageOverlayPressedColor="@color/black"
+            app:incomingDefaultImageOverlaySelectedColor="@color/gray"
+            app:incomingTextColor="@color/black"
+            app:incomingTextLinkColor="@color/green"
+            app:incomingTextSize="18sp"
+
+
+            app:outcomingDefaultBubbleColor="#D2B3FD"
+            app:outcomingDefaultBubblePressedColor="@color/purple_dark"
+            app:outcomingDefaultBubbleSelectedColor="@color/cornflower_blue_two_dark"
+            app:outcomingDefaultImageOverlayPressedColor="@color/black"
+            app:outcomingDefaultImageOverlaySelectedColor="@color/gray"
+            app:outcomingTextColor="@color/black"
+            app:outcomingTextLinkColor="@color/brown"
+            app:outcomingTextSize="18sp">
 
         </com.stfalcon.chatkit.messages.MessagesList>
 
@@ -37,7 +76,7 @@
             app:inputButtonMargin="16dp"
             app:inputButtonWidth="30dp"
             app:inputButtonDefaultIconColor="@color/green"
-            app:inputButtonDefaultBgPressedColor="@color/black"
+            app:inputButtonDefaultBgPressedColor="@color/purple"
             app:inputMaxLines="2"
             app:inputTextColor="@color/black"
             app:inputTextSize="18sp"

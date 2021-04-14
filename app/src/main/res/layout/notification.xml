@@ -81,12 +81,19 @@
 
         <TextView
             android:id="@+id/due_date"
-            android:layout_width="94dp"
-            android:layout_height="22dp"
+            android:layout_width="289dp"
+            android:layout_height="41dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="76dp"
             android:ems="10"
+            android:fadeScrollbars="false"
+            android:fadingEdge="vertical"
             android:inputType="date"
+            android:isScrollContainer="true"
+            android:nestedScrollingEnabled="true"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="horizontal|vertical"
+            android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/due_date_info"
             app:layout_constraintTop_toTopOf="@+id/NotificationText" />
 
@@ -102,14 +109,21 @@
 
         <TextView
             android:id="@+id/sending_date"
-            android:layout_width="94dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="12dp"
+            android:layout_width="213dp"
+            android:layout_height="31dp"
             android:layout_marginTop="39dp"
             android:layout_marginBottom="5dp"
             android:ems="10"
+            android:fadeScrollbars="false"
             android:inputType="date"
+            android:isScrollContainer="TRUE"
+            android:nestedScrollingEnabled="true"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="horizontal|vertical"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/due_date"
+            app:layout_constraintEnd_toStartOf="@+id/NoIamBad"
+            app:layout_constraintHorizontal_bias="0.317"
             app:layout_constraintStart_toEndOf="@+id/sending_date_info"
             app:layout_constraintTop_toTopOf="@+id/NotificationText"
             app:layout_constraintVertical_bias="1.0" />
