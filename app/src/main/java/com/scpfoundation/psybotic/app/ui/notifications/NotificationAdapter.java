@@ -18,8 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.data.Notification;
+import com.scpfoundation.psybotic.app.ui.chatbot.ChatBotActivity;
 import com.scpfoundation.psybotic.app.ui.profile.ProfileActivity;
 import com.scpfoundation.psybotic.app.ui.psychologychat.PsychologyActivity;
+
+import org.json.JSONObject;
 
 import java.util.Date;
 import java.util.List;
@@ -72,6 +75,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                 deleteItem(position,holder);
 
 
+
             }
         });
         hastayim.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +83,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             public void onClick(View v) {
                 //RequestQueue requestQueue = Volley.newRequestQueue(iyiyim.getContext());;
                 String url = HOST + "/notifications/update";
-                Intent intent = new Intent(v.getContext(), PsychologyActivity.class);
+                Intent intent = new Intent(v.getContext(), ChatBotActivity.class);
                 deleteItem(position,holder);
                 v.getContext().startActivity(intent);
 
