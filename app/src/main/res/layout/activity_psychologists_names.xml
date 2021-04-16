@@ -7,6 +7,7 @@
     tools:context=".ui.psychologychat.PsychologistsNames"
     android:fillViewport="false">
     <LinearLayout
+        android:id="@id/all_screen"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -63,6 +64,7 @@
 
     <LinearLayout
         android:id="@+id/first_row"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
