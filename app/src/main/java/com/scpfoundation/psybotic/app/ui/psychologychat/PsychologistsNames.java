@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.scpfoundation.psybotic.app.R;
 
+import java.util.Arrays;
 
 
 public class PsychologistsNames extends AppCompatActivity {
@@ -20,6 +22,7 @@ public class PsychologistsNames extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_psychologists_names);
+        System.out.println("HUJ "+getIntent().getExtras().get("psychologists"));
     }
 
 

@@ -8,6 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -15,6 +23,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.gson.Gson;
 import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.ui.login.LoginActivity;
 import com.scpfoundation.psybotic.app.ui.notifications.NotificationActivity;
@@ -23,11 +32,14 @@ import com.scpfoundation.psybotic.app.ui.chatbot.ChatBotActivity;
 import com.scpfoundation.psybotic.app.ui.psychologychat.PsychologistsNames;
 import com.scpfoundation.psybotic.app.ui.psychologychat.PsychologyActivity;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnCompleteListener<Void>{
 
     private GoogleSignInAccount account;
     private TextView greetingsTextView;
     private GoogleSignInClient mGoogleSignInClient;
+    private final String HOST = "https://limitless-lake-96203.herokuapp.com";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FirebaseApp.initializeApp(this.getApplicationContext());
@@ -61,7 +73,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.psychologist_chat_view:
                 // go to psychologist chat page
                 Intent intentforPsychology = new Intent(this.getApplicationContext(), PsychologistsNames.class);
-                startActivity(intentforPsychology);
+                RequestQueue requestQueue = Volley.newRequestQueue(this.getApplicationContext());
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, HOST+ "/psychologists/verifiedPsychologists",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                intentforPsychology.putExtra("psychologists",response);
+                                startActivity(intentforPsychology);
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+                requestQueue.add(stringRequest);
+
                 break;
             case R.id.notifications_view:
                 Intent intent = new Intent(this.getApplicationContext(), NotificationActivity.class);
