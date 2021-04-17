@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -24,7 +25,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.scpfoundation.psybotic.app.R;
+import com.scpfoundation.psybotic.app.data.EmergencyContact;
 import com.scpfoundation.psybotic.app.ui.login.LoginActivity;
 import com.scpfoundation.psybotic.app.ui.notifications.NotificationActivity;
 import com.scpfoundation.psybotic.app.ui.profile.ProfileActivity;
@@ -32,7 +35,10 @@ import com.scpfoundation.psybotic.app.ui.chatbot.ChatBotActivity;
 import com.scpfoundation.psybotic.app.ui.psychologychat.PsychologistsNames;
 import com.scpfoundation.psybotic.app.ui.psychologychat.PsychologyActivity;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnCompleteListener<Void>{
 

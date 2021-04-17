@@ -3,7 +3,9 @@ package com.scpfoundation.psybotic.app.request;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -15,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.data.EmergencyContact;
 import com.scpfoundation.psybotic.app.data.FamilyMember;
 import com.scpfoundation.psybotic.app.ui.profile.EmergencyContactAdapter;
@@ -58,6 +61,16 @@ public class EmergencyContactSubmitRequest
         };
         dialog = ProgressDialog.show(this.context, "",
                 "Loading. Please wait...", true);
+        Intent email = new Intent(Intent.ACTION_SEND);
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{ emergencyContact.getEmail()});
+        email.putExtra(Intent.EXTRA_SUBJECT, "Emergency");
+        email.putExtra(Intent.EXTRA_TEXT, "A disaster happened right now, please let us " +
+                "know if there's an emergency. ");
+
+        //need this to prompts email client only
+        email.setType("message/rfc822");
+//        emergencyContact.
+        context.startActivity(Intent.createChooser(email, "EMERGENCY_ALARM!!"));
         requestQueue.add(req);
     }
 
