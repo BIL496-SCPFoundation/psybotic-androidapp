@@ -68,22 +68,19 @@ public class NotificationActivity extends AppCompatActivity   implements  View.O
         String url = HOST + "/users/notifications?userId=" + account.getId();
         loadingNotifications.setVisibility(View.VISIBLE);
         JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, url,
-                null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                loadingNotifications.setVisibility(View.GONE);
-                Gson gson = new Gson();
-                Type type = new TypeToken<ArrayList<Notification>>() {
-                }.getType();
+                null, (Response.Listener<JSONArray>) response -> {
+                    loadingNotifications.setVisibility(View.GONE);
+                    Gson gson = new Gson();
+                    Type type = new TypeToken<ArrayList<Notification>>() {
+                    }.getType();
 
-                List<Notification> notifications =
-                        (List<Notification>) gson.fromJson(response.toString(), type);
-                notificationAdapter = new NotificationAdapter(notifications);
-                notifitcanList.setAdapter(notificationAdapter);
-                notifitcanList.setLayoutManager(new LinearLayoutManager(getAppContext()));
-//                familyMemberList.setNestedScrollingEnabled(false);
-            }
-        }, new Response.ErrorListener() {
+                    List<Notification> notifications =
+                            gson.fromJson(response.toString(), type);
+                    notificationAdapter = new NotificationAdapter(notifications);
+                    notifitcanList.setAdapter(notificationAdapter);
+                    notifitcanList.setLayoutManager(new LinearLayoutManager(getAppContext()));
+    //                familyMemberList.setNestedScrollingEnabled(false);
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //to do something..

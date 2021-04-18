@@ -12,24 +12,10 @@ public class Notification {
     private String textHeader;
     private String text;
     private boolean status;
-    private boolean replied;
-    private Date createdDate;
+    private boolean reply;
+    private Date sendingDate;
     private Date replyDate;
-    private ImageView imageView;
-
-    @Override
-    public String toString() {
-        return "Notification{" +
-                "notificationId='" + id + '\'' +
-                ", userId='" + userId + '\'' +
-                ", textHeader='" + textHeader + '\'' +
-                ", text='" + text + '\'' +
-                ", status=" + status +
-                ", reply=" + replied +
-                ", sendingDate=" + createdDate +
-                ", replyDate=" + replyDate +
-                '}';
-    }
+    private boolean bildiri;
 
     public String getId() {
         return id;
@@ -71,20 +57,20 @@ public class Notification {
         this.status = status;
     }
 
-    public boolean isReplied() {
-        return replied;
+    public boolean isReply() {
+        return reply;
     }
 
-    public void setReplied(boolean replied) {
-        this.replied = replied;
+    public void setReply(boolean reply) {
+        this.reply = reply;
     }
 
     public Date getSendingDate() {
-        return createdDate;
+        return sendingDate;
     }
 
     public void setSendingDate(Date sendingDate) {
-        this.createdDate = sendingDate;
+        this.sendingDate = sendingDate;
     }
 
     public Date getReplyDate() {
@@ -94,17 +80,12 @@ public class Notification {
     public void setReplyDate(Date replyDate) {
         this.replyDate = replyDate;
     }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Notification)) return false;
-        Notification that = (Notification) o;
-        return isStatus() == that.isStatus() && isReplied() == that.isReplied() && Objects.equals(getId(), that.getId()) && Objects.equals(getUserId(), that.getUserId()) && Objects.equals(getTextHeader(), that.getTextHeader()) && Objects.equals(getText(), that.getText()) && Objects.equals(getSendingDate(), that.getSendingDate()) && Objects.equals(getReplyDate(), that.getReplyDate());
+
+    public boolean isBildiri() {
+        return bildiri;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getUserId(), getTextHeader(), getText(), isStatus(), isReplied(), getSendingDate(), getReplyDate());
+    public void setBildiri(boolean bildiri) {
+        this.bildiri = bildiri;
     }
-
 }
