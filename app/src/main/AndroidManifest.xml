@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.scpfoundation.psybotic.app">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,23 +13,24 @@
         android:roundIcon="@mipmap/app_icon_rounded"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.info.PsychologistInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <!--
+               Set to true if your app is Standalone, that is, it does not require the handheld
+               app to run.
+        -->
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+
         <service android:name=".service.MessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-
-<!--        <service-->
-<!--            android:name=".service.MessagingService">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>-->
-<!--            </intent-filter>-->
-<!--        </service>-->
-
+        </service> <!-- <service -->
         <activity
             android:name=".ui.realUserChat.DialogList"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.realUserChat.PsychologyActivity"
             android:label="@string/title_activity_psychologists"
@@ -38,7 +41,7 @@
         <!-- android:label="Profile"/> -->
         <activity
             android:name=".ui.chatbot.ChatActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_main"

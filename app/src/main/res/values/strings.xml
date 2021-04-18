@@ -68,5 +68,19 @@
     <string name="start_conversation_text">Chat now</string>
     <string name="see_more_text">See more</string>
     <string name="available_psychologists_text">Avaliable Psychologists</string>
+    <string name="title_activity_psychologist_info">PsychologistInfoActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="title_label">Title</string>
+    <string name="name_label">Name</string>
+    <string name="expertise_label">Expertise</string>
+    <string name="age_of_interest">Age of interest</string>
+    <string name="high_school">High School</string>
+    <string name="university">University</string>
+    <string name="master">Master</string>
+    <string name="biography">Biography</string>
 
 </resources>

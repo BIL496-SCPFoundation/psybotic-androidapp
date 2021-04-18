@@ -16,6 +16,7 @@ import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.data.Psychologist;
 import com.scpfoundation.psybotic.app.data.User;
 import com.scpfoundation.psybotic.app.ui.chatbot.ChatActivity;
+import com.scpfoundation.psybotic.app.ui.info.PsychologistInfoActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -69,6 +70,11 @@ public class PsychologistAdapter extends RecyclerView.Adapter<PsychologistAdapte
 
         });
         Button seeMore = holder.seeMore;
+        seeMore.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), PsychologistInfoActivity.class);
+            intent.putExtra("psychologist", psychologist);
+            startActivity(v.getContext(), intent, null);
+        });
     }
 
     @Override
