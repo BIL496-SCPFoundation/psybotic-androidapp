@@ -1,10 +1,8 @@
-package com.scpfoundation.psybotic.app.ui.psychologychat;
+package com.scpfoundation.psybotic.app.ui.realUserChat;
 
 import com.scpfoundation.psybotic.app.ui.chatbot.Author;
 
 import java.util.Date;
-
-import static java.lang.Math.random;
 
 public class Message implements com.stfalcon.chatkit.commons.models.IMessage {
 

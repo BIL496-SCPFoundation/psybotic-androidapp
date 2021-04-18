@@ -1,4 +1,4 @@
-package com.scpfoundation.psybotic.app.ui.psychologychat;
+package com.scpfoundation.psybotic.app.ui.realUserChat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,11 +12,6 @@ import com.stfalcon.chatkit.commons.ImageLoader;
 import com.stfalcon.chatkit.messages.MessageInput;
 import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PsychologyActivity extends AppCompatActivity {
 

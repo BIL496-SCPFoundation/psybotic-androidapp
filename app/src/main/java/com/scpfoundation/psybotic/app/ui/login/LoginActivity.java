@@ -151,8 +151,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         User user = new User();
         user.setEmail(account.getEmail());
         user.setFirstName(account.getGivenName());
+        user.setFirstName(account.getGivenName());
         user.setLastName(account.getFamilyName());
         user.setGoogleId(account.getId());
+        if (account.getPhotoUrl() != null) {
+            user.setImageUrl(account.getPhotoUrl().toString());
+        }
         return user;
     }
 

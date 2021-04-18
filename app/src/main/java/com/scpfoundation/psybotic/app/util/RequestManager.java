@@ -117,13 +117,11 @@ public class RequestManager {
             url += "?";
         }
         StringBuilder urlBuilder = new StringBuilder(url);
-        int i = 0;
-        for (String key :
-                params.keySet()) {
-            if (i != 0) {
-                urlBuilder.append("&");
+        if (params != null) {
+            for (String key :
+                    params.keySet()) {
+                urlBuilder.append(key).append("=").append(params.get(key));
             }
-            urlBuilder.append(key).append("=").append(params.get(key));
         }
         return urlBuilder.toString();
     }

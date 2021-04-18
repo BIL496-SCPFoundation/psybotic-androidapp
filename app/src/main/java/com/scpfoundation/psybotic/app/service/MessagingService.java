@@ -51,9 +51,10 @@ public class MessagingService extends FirebaseMessagingService {
         intent.putExtra("lastName", remoteMessage.getData().get("senderLastName"));
         if (broadcaster != null) {
             broadcaster.sendBroadcast(intent);
+        } else {
+            showNotification(remoteMessage.getNotification());
         }
 
-        showNotification(remoteMessage.getNotification());
     }
 
     public void showNotification(RemoteMessage.Notification message) {

@@ -11,14 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.scpfoundation.psybotic.app.R;
 import com.scpfoundation.psybotic.app.data.Notification;
-import com.scpfoundation.psybotic.app.ui.profile.ProfileActivity;
-import com.scpfoundation.psybotic.app.ui.psychologychat.PsychologyActivity;
+import com.scpfoundation.psybotic.app.ui.realUserChat.PsychologyActivity;
 
 import java.util.Date;
 import java.util.List;

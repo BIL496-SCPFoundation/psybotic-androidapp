@@ -24,11 +24,12 @@
 <!--            </intent-filter>-->
 <!--        </service>-->
 
-        <activity android:name=".ui.psychologychat.PsychologistsNames"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.realUserChat.DialogList"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".ui.psychologychat.PsychologyActivity"
+            android:name=".ui.realUserChat.PsychologyActivity"
             android:label="@string/title_activity_psychologists"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -37,7 +38,7 @@
         <!-- android:label="Profile"/> -->
         <activity
             android:name=".ui.chatbot.ChatActivity"
-            android:label="ChatBot" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/title_activity_main"

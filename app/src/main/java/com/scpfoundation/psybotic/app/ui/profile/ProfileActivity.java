@@ -40,6 +40,7 @@ import com.scpfoundation.psybotic.app.listener.FamilyMemberSubmitListener;
 import com.scpfoundation.psybotic.app.request.EmergencyContactSubmitRequest;
 import com.scpfoundation.psybotic.app.request.FamilyMemberSubmitRequest;
 import com.scpfoundation.psybotic.app.ui.util.DownloadImageTask;
+import com.squareup.picasso.Picasso;
 import com.wrapp.floatlabelededittext.FloatLabeledEditText;
 
 import org.json.JSONArray;
@@ -90,9 +91,13 @@ public class ProfileActivity
         requestQueue = Volley.newRequestQueue(this.getApplicationContext());
         imageLoading = findViewById(R.id.image_loading);
         profileImage = findViewById(R.id.profile_image);
-        //new DownloadImageTask(profileImage, imageLoading)
-               //.execute(account.getPhotoUrl().toString());
-
+        if (account.getPhotoUrl() != null) {
+//            Picasso.get().load(account.getPhotoUrl().toString()).into(profileImage);
+            new DownloadImageTask(profileImage, imageLoading)
+                    .execute(account.getPhotoUrl().toString());
+        } else {
+            imageLoading.setVisibility(View.GONE);
+        }
         //find the user data
         String url = HOST + "/users/findById?id=" + account.getId();
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url,
@@ -388,22 +393,18 @@ public class ProfileActivity
         String url = HOST + "/users/familyMembers?userId=" + account.getId();
         loadingFamilyMembers.setVisibility(View.VISIBLE);
         JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, url,
-                null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                loadingFamilyMembers.setVisibility(View.GONE);
-                        Gson gson = new Gson();
-                Type type = new TypeToken<ArrayList<FamilyMember>>(){}.getType();
+                null, response -> {
+                    loadingFamilyMembers.setVisibility(View.GONE);
+                            Gson gson = new Gson();
+                    Type type = new TypeToken<ArrayList<FamilyMember>>(){}.getType();
 
-                List<FamilyMember> familyMembers =
-                        (List<FamilyMember>) gson.fromJson(response.toString(), type);
-                familyMemberAdapter = new FamilyMemberAdapter(familyMembers);
-                fmSubmitRequest.setAdapter(familyMemberAdapter);
-                familyMemberList.setAdapter(familyMemberAdapter);
-                familyMemberList.setLayoutManager(new LinearLayoutManager(getAppContext()));
-//                familyMemberList.setNestedScrollingEnabled(false);
-            }
-        }, this);
+                    List<FamilyMember> familyMembers =
+                            gson.fromJson(response.toString(), type);
+                    familyMemberAdapter = new FamilyMemberAdapter(familyMembers);
+                    fmSubmitRequest.setAdapter(familyMemberAdapter);
+                    familyMemberList.setAdapter(familyMemberAdapter);
+                    familyMemberList.setLayoutManager(new LinearLayoutManager(getAppContext()));
+                }, this);
         requestQueue.add(req);
     }
 }

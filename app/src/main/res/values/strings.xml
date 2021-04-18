@@ -62,5 +62,11 @@
     <string name="pr_selen">Pr. Selen</string>
     <string name="pr_mert">Pr. Mert</string>
     <string name="EmptyString">..</string>
+    <string name="chat_default_title">Chatbot</string>
+    <string name="conversations_title">Conversations</string>
+    <string name="on_going_conversations">On going conversations</string>
+    <string name="start_conversation_text">Chat now</string>
+    <string name="see_more_text">See more</string>
+    <string name="available_psychologists_text">Avaliable Psychologists</string>
 
 </resources>
