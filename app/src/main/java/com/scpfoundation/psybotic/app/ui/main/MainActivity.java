@@ -30,7 +30,7 @@ import com.scpfoundation.psybotic.app.util.Utility;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnCompleteListener<Void>{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnCompleteListener<Void> {
 
     private GoogleSignInAccount account;
     private TextView greetingsTextView;
@@ -39,15 +39,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RequestManager requestManager;
     private String HOST = "https://limitless-lake-96203.herokuapp.com/";
     private final Context CTX = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FirebaseApp.initializeApp(this.getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         requestManager = RequestManager.getInstance(this);
-        greetingsTextView= findViewById(R.id.greetings_text);
+        greetingsTextView = findViewById(R.id.greetings_text);
         account = (GoogleSignInAccount) getIntent().getExtras().get("account");
-        String greetingText = (account != null) ?  "Welcome " + account.getDisplayName() : "Welcome dear guest";
+        String greetingText = (account != null) ? "Welcome " + account.getDisplayName() : "Welcome dear guest";
         if (greetingsTextView != null) {
             greetingsTextView.setText(greetingText);
         }
@@ -74,20 +75,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.ai_chat_view:
+                if (account != null) {
+                    Intent intentForChat = new Intent(this.getApplicationContext(), ChatActivity.class);
+                    startActivity(intentForChat);
+                }
                 // go to ai chat page
-                Intent intentForChat = new Intent(this.getApplicationContext(), ChatActivity.class);
-                startActivity(intentForChat);
                 break;
             case R.id.psychologist_chat_view:
                 // go to psychologist chat page
-                Intent intentForPsychology = new Intent(this.getApplicationContext(), DialogList.class);
-                intentForPsychology.putExtra("isPsychologist", user.isPsychologist());
-                startActivity(intentForPsychology);
+                if (account != null) {
+                    Intent intentForPsychology = new Intent(this.getApplicationContext(), DialogList.class);
+                    intentForPsychology.putExtra("isPsychologist", user.isPsychologist());
+                    startActivity(intentForPsychology);
+                }
                 break;
             case R.id.notifications_view:
-                Intent intent = new Intent(this.getApplicationContext(), NotificationActivity.class);
-                intent.putExtra("account", account);
-                startActivity(intent);
+                if (account != null) {
+                    Intent intent = new Intent(this.getApplicationContext(), NotificationActivity.class);
+                    intent.putExtra("account", account);
+                    startActivity(intent);
+                }
                 break;
             case R.id.logout_icon:
                 signOut();
