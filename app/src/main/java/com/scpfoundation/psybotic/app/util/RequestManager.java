@@ -5,9 +5,11 @@ import android.content.Context;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Map;
@@ -68,6 +70,21 @@ public class RequestManager {
     }
 
     /**
+     *  This method send a GET request to the specified url and waits for a json array response
+     * @param url: the url to send the get request
+     * @param params: GET request params (Map<String
+     * @param responseListener: success response cal
+     * @param errorListener: error callback
+     */
+    public void getArrayRequest(String url, Map<String, String> params,
+                                Response.Listener<JSONArray> responseListener,
+                                Response.ErrorListener errorListener) {
+        url = prepareUrlWithParams(url, params);
+        prepareArrayRequest(url, Request.Method.GET, responseListener, errorListener);
+
+    }
+
+    /**
      *  This method sends a DELETE request to the specified url
      *
      * @param url: the url to send the post request
@@ -116,6 +133,14 @@ public class RequestManager {
                                 Response.ErrorListener errorListener) {
         JsonObjectRequest request = new JsonObjectRequest(
                 method, url, null, responseListener, errorListener);
+        requestQueue.add(request);
+    }
+
+    private void prepareArrayRequest(String url, int method, Response.Listener<JSONArray> responseListener,
+                                     Response.ErrorListener errorListener) {
+        JsonArrayRequest request = new JsonArrayRequest(
+                method, url, null, responseListener, errorListener
+        );
         requestQueue.add(request);
     }
 

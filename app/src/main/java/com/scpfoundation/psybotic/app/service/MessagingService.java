@@ -25,7 +25,11 @@ public class MessagingService extends FirebaseMessagingService {
     private LocalBroadcastManager broadcaster;
 
     public MessagingService() {
-        broadcaster = LocalBroadcastManager.getInstance(this);
+        try {
+            broadcaster = LocalBroadcastManager.getInstance(this);
+        } catch (Exception e) {
+            Log.e("Broadcaster error", e.getMessage());
+        }
     }
 
     @Override
@@ -37,15 +41,19 @@ public class MessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
-        Log.d("MSG",remoteMessage.getNotification().getBody());
+        if (remoteMessage.getNotification().getBody() != null) {
+            Log.d("MSG",remoteMessage.getNotification().getBody());
+        }
         Intent intent = new Intent("messageData");
         intent.putExtra("senderId", remoteMessage.getData().get("senderId"));
         intent.putExtra("message", remoteMessage.getData().get("message"));
         intent.putExtra("firstName", remoteMessage.getData().get("senderFirstName"));
         intent.putExtra("lastName", remoteMessage.getData().get("senderLastName"));
-        broadcaster.sendBroadcast(intent);
+        if (broadcaster != null) {
+            broadcaster.sendBroadcast(intent);
+        }
 
-//        showNotification(remoteMessage.getNotification());
+        showNotification(remoteMessage.getNotification());
     }
 
     public void showNotification(RemoteMessage.Notification message) {

@@ -1,29 +1,29 @@
 package com.scpfoundation.psybotic.app.data;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class ChatMessage {
-    /*
-    * "data": {
-    "id": "string",
-    "receiverId": "string",
-    "senderId": "string",
-    "message": "string",
-    "senderFirstName": "string",
-    "senderLastName": "string",
-    "date": "2021-03-26T18:55:47.541Z"
-  }*/
+    private String id;
+    private String chatRoomId;
+    private String receiverId;
+    private String senderId;
+    private String message;
+    private String senderFirstName;
+    private String senderLastName;
+    private Date date;
 
-
-    public String getReceiverId() {
-        return receiverId;
+    public ChatMessage() {
     }
 
-    public void setReceiverId(String receiverId) {
+    public ChatMessage(String message, String senderFirstName, String senderLastName, String receiverId, String senderId, String chatRoomId) {
+        this.message = message;
+        this.senderFirstName = senderFirstName;
+        this.senderLastName = senderLastName;
         this.receiverId = receiverId;
+        this.senderId = senderId;
+        this.chatRoomId = chatRoomId;
     }
-
-
 
     public String getId() {
         return id;
@@ -31,6 +31,22 @@ public class ChatMessage {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getChatRoomId() {
+        return chatRoomId;
+    }
+
+    public void setChatRoomId(String chatRoomId) {
+        this.chatRoomId = chatRoomId;
+    }
+
+    public String getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
     }
 
     public String getSenderId() {
@@ -65,33 +81,26 @@ public class ChatMessage {
         this.senderLastName = senderLastName;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    private String message;
-
-    public ChatMessage(String message, String senderFirstName, String senderLastName, String date,
-                        String receiverId, String senderId) {
-        this.message = message;
-        this.senderFirstName = senderFirstName;
-        this.senderLastName = senderLastName;
-        this.date = date;
-        this.receiverId = receiverId;
-        this.senderId = senderId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChatMessage)) return false;
+        ChatMessage that = (ChatMessage) o;
+        return getId().equals(that.getId()) && Objects.equals(getChatRoomId(), that.getChatRoomId()) && getReceiverId().equals(that.getReceiverId()) && getSenderId().equals(that.getSenderId()) && Objects.equals(getMessage(), that.getMessage()) && Objects.equals(getSenderFirstName(), that.getSenderFirstName()) && Objects.equals(getSenderLastName(), that.getSenderLastName()) && Objects.equals(getDate(), that.getDate());
     }
 
-    private String senderFirstName;
-    private String senderLastName;
-    private String date;
-    private String id;
-    private String receiverId;
-    private String senderId;
-    /*variables */
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getChatRoomId(), getReceiverId(), getSenderId(), getMessage(), getSenderFirstName(), getSenderLastName(), getDate());
+    }
 
 
 }
